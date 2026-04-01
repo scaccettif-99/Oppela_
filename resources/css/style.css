@@ -1,9 +1,11 @@
 :root {
-    --b: #111111;  /* nero */
-    --w: #feed02;  /* bianco */
+    --b: #1a1814;  /* quasi nero con tono caldo */
+    --w: #feed02;  /* giallo oppela */
+    --y: #fdfaf5;   /*bianco avorio */
     --z: #feed02;  /* giallo Oppela */
     --g: #9a9a9a;  /* grigio sfondo */
     --t: rgba(0, 0, 0, 0.45); /* nero trasparente (caption-box) */
+    --nude: #e8e0d5;  /* beige neutro, molto usato nel fashion */
 }
 
 body{
@@ -32,7 +34,7 @@ body{
 }
 
 .nav-link:hover {
-    background-color: black;
+    background-color: var(--b);
     color: white !important;
     border-radius: 20px;
 }
@@ -102,8 +104,10 @@ body{
     font-size: 1.2rem;
 }
 
-.caption-box{
-    background:var(--t);
+/* .caption-box {
+    background: rgba(253, 250, 245, 0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(253, 250, 245, 0.2);
     border-radius: 10px;
     max-width: 500px;
     margin: 0 auto;
@@ -112,6 +116,23 @@ body{
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
+.caption-box.animate {
+    opacity: 1;
+    transform: translateY(0);
+} */
+.caption-box {
+    background: transparent;
+    border: none;
+    border-top: 2px solid rgba(253, 250, 245, 0.5);
+    border-bottom: 2px solid rgba(253, 250, 245, 0.5);
+    border-radius: 0;
+    padding: 1.2rem 0;
+    max-width: 500px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
 .caption-box.animate {
     opacity: 1;
     transform: translateY(0);
@@ -134,12 +155,12 @@ body{
 
 /* FOOTER */
 .site-footer {
-    background-color: #111;
-    color: #aaa;
+    background-color: #1a1814;      /* nero caldo, non puro */
+    color: #a89f94;                 /* grigio caldo, non freddo */
     font-family: 'Georgia', serif;
-    padding: 3rem 0 0;
+    padding: 3.5rem 0 0;
     margin-top: 4rem;
-    border-top: 1px solid #2a2a2a;
+    border-top: 3px solid #feed02; /* giallo come unico accento forte */
 }
 
 .footer-inner {
@@ -156,68 +177,87 @@ body{
 /* Brand */
 .footer-logo {
     display: block;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 400;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #f5f0eb;
-    margin-bottom: 0.4rem;
+    color: #fdfaf5;                 /* avorio caldo */
+    margin-bottom: 0.5rem;
 }
 
 .footer-tagline {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: #555;
+    color: #feed02;                 /* giallo solo qui — accento sottile */
     margin: 0;
+    font-style: italic;
 }
 
 /* Nav */
 .footer-nav {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.7rem;
 }
 
 .footer-nav a {
-    color: #888;
+    color: #8a8178;                 /* grigio caldo */
     text-decoration: none;
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.footer-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #feed02;      /* underline giallo sull'hover */
+    transition: width 0.3s ease;
 }
 
 .footer-nav a:hover {
-    color: #f5f0eb;
+    color: #fdfaf5;
+}
+
+.footer-nav a:hover::after {
+    width: 100%;
 }
 
 /* Social */
 .footer-social {
     display: flex;
-    gap: 1rem;
+    gap: 1.2rem;
     align-items: center;
 }
 
 .footer-social a {
-    color: #666;
-    font-size: 1.3rem;
-    transition: color 0.2s ease;
+    color: #6b635c;                 /* grigio caldo spento */
+    font-size: 1.4rem;
+    transition: color 0.3s ease, transform 0.3s ease;
     line-height: 1;
 }
 
 .footer-social a:hover {
-    color: #f5f0eb;
+    color: #feed02;                 /* giallo sull'hover delle icone */
+    transform: translateY(-3px);    /* piccolo sollevamento */
 }
 
 /* Bottom bar */
 .footer-bottom {
-    border-top: 1px solid #1e1e1e;
+    border-top: 1px solid #2a2520; /* bordo caldo, quasi invisibile */
     text-align: center;
-    padding: 1rem 2rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.06em;
-    color: #444;
+    padding: 1.2rem 2rem;
+    font-size: 0.70rem;
+    letter-spacing: 0.08em;
+    color: #3d3830;                 /* quasi invisibile, discreto */
+    font-style: italic;
 }
 
 /* Responsive */
@@ -230,6 +270,10 @@ body{
     
     .footer-nav {
         flex-direction: row;
-        gap: 1.2rem;
+        gap: 1.4rem;
+    }
+    
+    .footer-nav a::after {
+        display: none;             /* tolto su mobile, non serve */
     }
 }

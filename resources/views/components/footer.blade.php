@@ -3,7 +3,7 @@
         
         {{-- Brand --}}
         <div class="footer-brand">
-            <span class="footer-logo">Oppela!</span>
+            <span class="footer-logo">Oppela!!</span>
             <p class="footer-tagline">Moda &amp; Stile</p>
         </div>
         
@@ -27,6 +27,6 @@
     </div>
     
     <div class="footer-bottom">
-        <span>&copy; {{ date('Y') }} Oppela! &mdash; Tutti i diritti riservati</span>
+        <span>&copy; {{ date('Y') }} Oppela!! &mdash; Tutti i diritti riservati</span>
     </div>
 </footer>
