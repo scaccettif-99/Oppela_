@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>Oppela! Abbigliamento</title>
+    <link rel="icon" href="img/logo1.png" type="image/png">
 </head>
 <body>
     <x-nav/>
@@ -15,5 +16,8 @@
     </div>
 
     <x-footer/>
+    <button id="scrollTopBtn" class="btn btn-warning">
+        <i class="bi bi-arrow-up-circle-fill" style="font-size: 1.8rem;"></i>
+    </button>
 </body>
 </html>

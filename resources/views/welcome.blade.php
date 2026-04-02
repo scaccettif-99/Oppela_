@@ -53,6 +53,9 @@
 
 <!-- Sezioni Brand -->
 <section class="brands-section">
+    <div class="my-2 mb-3">
+        <h1 class="text-center my-2">I brand che troverai in negozio</h1>
+    </div>
 
     <!-- Brand 1 -->
     <div class="brand-row">
@@ -150,6 +153,23 @@
         </div>
     </div>
 
+</section>
+{{-- WHATSAPP BANNER PARALLASSE --}}
+{{-- <section class="whatsapp-banner">
+    <div class="overlay">
+        <div class="banner-content">
+            <h2>Contattaci direttamente su WhatsApp per chiedere maggiori informazioni o per fare il tuo ordine.</h2>
+            <a href="https://wa.me/39TUONUMERO" target="_blank" class="btn btn-success btn-whatsapp">
+                <i class="bi bi-whatsapp d-flex justify-content-center"></i> Invia Messaggio
+            </a>
+        </div>
+    </div>
+</section> --}}
+<section class="whatsapp-banner">
+    <div class="content">
+        <h3>Contattaci direttamente su whatsapp per chiedere maggiori informazioni o per fare il tuo ordine.</h3>
+        <a href="https://wa.me/+393381520444" target="_blank" class="btn"><i class="bi bi-whatsapp me-2"></i>WhatsApp</a>
+    </div>
 </section>
 
 <!-- Carosello Recensioni -->
@@ -262,7 +282,7 @@
                 <span class="orari-ore">Chiuso</span>
             </li>
         </ul>
-        <a href="https://wa.me/39NUMEROQUI" target="_blank" rel="noopener" class="btn info-btn">
+        <a href="https://wa.me/+393381520444" target="_blank" rel="noopener" class="btn info-btn">
             <i class="bi bi-whatsapp me-2"></i>Contattaci su WhatsApp
         </a>
     </div>

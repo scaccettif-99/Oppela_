@@ -14,14 +14,14 @@ body{
 /* NAVBAR */
 .nav-link{
     color: var(--b)!important;
-    background-color: var(--w);
+    background-color: transparent;
     height: 100%;
     transition: all 0.8s ease;
 }
 .navbar-nav {
     height: 100%;
     align-items: center;
-    background-color: #feed02;
+    background-color: transparent;
 }
 .navbar .nav-link {
     height: 100%;
@@ -57,6 +57,8 @@ body{
 .navSmall {
     height: 50px; 
     transition: 0.8s ease;
+    background-color: #feed0298;
+    backdrop-filter: blur(10px);
 }
 
 
@@ -74,6 +76,49 @@ body{
     margin: 0 !important;
 }
 
+@media (max-width: 768px) {
+    .logo {
+        height: 70px; /* 🔥 più piccolo */
+    }
+    
+    .navbar {
+        height: 60px; /* adattata al logo */
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 70px; /* altezza navbar mobile */
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: rgba(254, 237, 2, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 1rem 0;
+    }
+}
+.toggler-icon {
+    width: 60px;       /* dimensione del logo */
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.toggler-icon.animate-toggle {
+    transform: rotate(15deg) scale(1.2);
+}
+
+.navbar-toggler {
+    border: none;
+    background: transparent;
+    padding: 0.25rem 0.5rem;  /* mantiene il click target comodo */
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none; /* serve per togliere l'ombra che alcuni browser aggiungono */
+}
 /* CAROSELLO */
 
 .carousel-img {
@@ -102,20 +147,20 @@ body{
 }
 
 /* .caption-box {
-    background: rgba(253, 250, 245, 0.12);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(253, 250, 245, 0.2);
-    border-radius: 10px;
-    max-width: 500px;
-    margin: 0 auto;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+background: rgba(253, 250, 245, 0.12);
+backdrop-filter: blur(8px);
+border: 1px solid rgba(253, 250, 245, 0.2);
+border-radius: 10px;
+max-width: 500px;
+margin: 0 auto;
+opacity: 0;
+transform: translateY(30px);
+transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .caption-box.animate {
-    opacity: 1;
-    transform: translateY(0);
+opacity: 1;
+transform: translateY(0);
 } */
 .caption-box {
     background: transparent;
@@ -129,6 +174,7 @@ body{
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: 0.2s;
 }
 .caption-box.animate {
     opacity: 1;
@@ -250,6 +296,89 @@ body{
 
 .brand-card:hover .img-secondary {
     opacity: 1;
+}
+
+/* Versione mobile */
+/* Carosello per mobile */
+@media (max-width: 768px) {
+    .brand-scroll-wrapper {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory; /* snap per card */
+        -webkit-overflow-scrolling: touch; /* smooth scroll mobile */
+        padding: 0 1rem;
+    }
+    
+    .brand-scroll {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .brand-card {
+        flex: 0 0 90%; /* occupa quasi tutta la larghezza del viewport */
+        scroll-snap-align: center;
+        width: auto;   /* non forzare la width altrimenti si comprime */
+        min-width: 280px; /* mantiene altezza originale */
+        max-width: 350px; /* previene eccessiva espansione */
+    }
+}
+/* BANNER WHATSAPP */
+.whatsapp-banner {
+    position: relative;
+    background-image: url('/public/img/SanValentino.JPG'); /* sfondo */
+    background-attachment: fixed; /* parallasse */
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: #fff;
+    padding: 10rem 2rem;
+    min-height: 400px;
+    overflow: hidden;
+}
+
+/* overlay scuro centrale per far risaltare il testo */
+.whatsapp-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4); /* patina scura */
+    z-index: 1;
+}
+
+/* sfumature sopra e sotto */
+.whatsapp-banner::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #ffffff 0%, rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, #1a1814 100%);
+    z-index: 2;
+}
+
+/* contenuto sopra l'overlay */
+.whatsapp-banner .content {
+    position: relative;
+    z-index: 3;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* pulsante in stile carosello */
+.whatsapp-banner .btn {
+    background-color: var(--b);
+    border-color: var(--w);
+    color: var(--w);
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    padding: 0.9rem 1.8rem;
+    font-size: 1.2rem ;
+}
+
+.whatsapp-banner .btn:hover {
+    background-color: var(--z);
+    color: var(--b);
+    border-color: var(--b);
 }
 
 /* REVIEWS SECTION */
@@ -411,20 +540,20 @@ body{
     .info-section {
         flex-direction: column;
     }
-
+    
     .info-orari {
         width: 100%;
         padding: 3rem 2rem;
     }
-
+    
     .info-mappa {
         width: 100%;
     }
-
+    
     .info-mappa iframe {
         min-height: 300px;
     }
-
+    
     .orari-list li {
         flex-direction: column;
         align-items: flex-start;
@@ -555,4 +684,26 @@ body{
     .footer-nav a::after {
         display: none;             /* tolto su mobile, non serve */
     }
+}
+
+/* Bottone torna in cima */
+#scrollTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1050; /* sopra tutto */
+    display: none; /* appare solo quando scrolli */
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(254, 237, 2, 0.9);
+    color: #1a1814;
+    padding: 0.6rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#scrollTopBtn:hover {
+    transform: translateY(-3px);
+    background-color: rgba(254, 237, 2, 1);
 }
