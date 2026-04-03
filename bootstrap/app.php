@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+    $middleware->alias([
+        'block.register' => \App\Http\Middleware\BlockRegisterIfUserExists::class,
+        'is.owner' => \App\Http\Middleware\IsOwner::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -9,9 +9,9 @@
         
         {{-- Link navigazione --}}
         <nav class="footer-nav" aria-label="Footer navigation">
-            <a href="{{ url('/') }}">Home</a>
+            <a href="{{ route('welcome') }}">Home</a>
             <a href="{{ url('/gallery') }}">Gallery</a>
-            <a href="{{ url('/contatti') }}">Contatti</a>
+            <a href="{{ route('contact') }}">Contatti</a>
         </nav>
         
         {{-- Social / WhatsApp --}}

@@ -1,116 +1,96 @@
-let navbar = document.querySelector(`.navbar`);
-let bgNav = document.querySelector(`.bg-t`);
-let navlink = document.querySelectorAll(`.nav-link`);
-let caroSello = document.querySelector('#heroCarousel');
-let boxesCaption = document.querySelectorAll('.caption-box');
-
-
-// window.addEventListener(`scroll`,()=>{
-    //     if (window.scrollY > 0) {
-//         navbar.classList.add(`navSmall`)
-//     }else{
-    //         navbar.classList.remove(`navSmall`)
-//     }
-// })
-
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-    let currentScroll = window.scrollY;
-    
-    if (currentScroll > lastScroll && currentScroll > 100) {
-        navbar.style.top = "-80px"; // nasconde
-    } else {
-        navbar.style.top = "0"; // mostra
-    }
-    
-    if (currentScroll > 50) {
-        navbar.classList.add('navSmall');
-    } else {
-        navbar.classList.remove('navSmall');
-    }
-    
-    lastScroll = currentScroll;
-});
-
-// animazione caption del carosello
-
-
-
-function togliAnimaz() {
-    boxesCaption.forEach(box => {
-        box.classList.remove('animate');
-    });
-}
-function animaSlideAttiva() {
-    let activeSlide = document.querySelector('.carousel-item.active');
-    let activeCaption = activeSlide.querySelector('.caption-box');
-    if (activeCaption) {
-        activeCaption.classList.add('animate');
-    }
-}
-
-// Al caricamento della pagina, anima subito la prima slide
 document.addEventListener('DOMContentLoaded', () => {
-    animaSlideAttiva();
-});
 
-// Al cambio slide, resetta e anima la nuova slide
-caroSello.addEventListener('slid.bs.carousel', () => {
-    togliAnimaz();
-    animaSlideAttiva();
-});
+    const navbar = document.querySelector('.navbar');
+    const toggler = document.querySelector('.navbar-toggler');
+    const icon = document.querySelector('.toggler-icon');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    const caroSello = document.querySelector('#heroCarousel');
+    const boxesCaption = document.querySelectorAll('.caption-box');
 
-let scrollTopBtn = document.getElementById('scrollTopBtn');
-let navbarCollapse = document.querySelector('.navbar-collapse');
+    // navbar scroll
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        let currentScroll = window.scrollY;
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) { 
-        scrollTopBtn.style.display = 'block';
-    } else {
-        scrollTopBtn.style.display = 'none';
-    }
-    
-    // Chiude il menu mobile se è aperto
-    if (navbarCollapse.classList.contains('show')) {
-        navbarCollapse.classList.remove('show');
-    }
-});
-
-scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    
-    // Chiude il menu mobile se è aperto
-    if (navbarCollapse.classList.contains('show')) {
-        navbarCollapse.classList.remove('show');
-    }
-});
-
-let toggler = document.querySelector('.navbar-toggler');
-let icon = document.querySelector('.toggler-icon');
-
-toggler.addEventListener('click', () => {
-    icon.classList.toggle('animate-toggle');
-});
-
-// INTERSECTION OBSERVER — brand cards
-const brandCards = document.querySelectorAll('.brand-card');
-
-const observerOptions = {
-    threshold: 0.15,       // card visibile al 15%
-    rootMargin: '0px 0px -50px 0px' // anticipa leggermente
-};
-
-const cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('card-visible');
-            cardObserver.unobserve(entry.target); // anima una volta sola
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            navbar.style.top = '-80px';
+        } else {
+            navbar.style.top = '0';
         }
-    });
-}, observerOptions);
 
-brandCards.forEach((card, index) => {
-    card.style.transitionDelay = `${(index % 5) * 0.1}s`; // stagger per gruppo di 5
-    cardObserver.observe(card);
+        if (currentScroll > 50) {
+            navbar.classList.add('navSmall');
+        } else {
+            navbar.classList.remove('navSmall');
+        }
+
+        lastScroll = currentScroll;
+    });
+
+    // scroll top button
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                navbarCollapse.classList.remove('show');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                navbarCollapse.classList.remove('show');
+            }
+        });
+    }
+
+    // toggler icon animation
+    if (toggler && icon) {
+        toggler.addEventListener('click', () => {
+            icon.classList.toggle('animate-toggle');
+        });
+    }
+
+    // animazione caption carosello
+    if (caroSello) {
+        const togliAnimaz = () => {
+            boxesCaption.forEach(box => box.classList.remove('animate'));
+        };
+
+        const animaSlideAttiva = () => {
+            const activeSlide = document.querySelector('.carousel-item.active');
+            if (activeSlide) {
+                const activeCaption = activeSlide.querySelector('.caption-box');
+                if (activeCaption) activeCaption.classList.add('animate');
+            }
+        };
+
+        animaSlideAttiva();
+
+        caroSello.addEventListener('slid.bs.carousel', () => {
+            togliAnimaz();
+            animaSlideAttiva();
+        });
+    }
+
+    // intersection observer brand cards
+    const brandCards = document.querySelectorAll('.brand-card');
+    if (brandCards.length > 0) {
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('card-visible');
+                    cardObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        brandCards.forEach((card, index) => {
+            card.style.transitionDelay = `${(index % 5) * 0.1}s`;
+            cardObserver.observe(card);
+        });
+    }
+
 });

@@ -10,16 +10,19 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav mx-4">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Chi siamo</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('annunci.index') }}">Shop</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Gallery</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contatti</a>
+                        <a class="nav-link" href="{{ route('contact') }}">Contatti</a>
                     </li>
                 </ul>
             </div>
