@@ -155,16 +155,6 @@
 
 </section>
 {{-- WHATSAPP BANNER PARALLASSE --}}
-{{-- <section class="whatsapp-banner">
-    <div class="overlay">
-        <div class="banner-content">
-            <h2>Contattaci direttamente su WhatsApp per chiedere maggiori informazioni o per fare il tuo ordine.</h2>
-            <a href="https://wa.me/39TUONUMERO" target="_blank" class="btn btn-success btn-whatsapp">
-                <i class="bi bi-whatsapp d-flex justify-content-center"></i> Invia Messaggio
-            </a>
-        </div>
-    </div>
-</section> --}}
 <section class="whatsapp-banner">
     <div class="content">
         <h3>Contattaci direttamente su whatsapp per chiedere maggiori informazioni o per fare il tuo ordine.</h3>
@@ -300,7 +290,5 @@
             title="Posizione negozio Oppela">
         </iframe>
     </div>
-
 </section>
-
 </x-layout>

@@ -92,3 +92,25 @@ let icon = document.querySelector('.toggler-icon');
 toggler.addEventListener('click', () => {
     icon.classList.toggle('animate-toggle');
 });
+
+// INTERSECTION OBSERVER — brand cards
+const brandCards = document.querySelectorAll('.brand-card');
+
+const observerOptions = {
+    threshold: 0.15,       // card visibile al 15%
+    rootMargin: '0px 0px -50px 0px' // anticipa leggermente
+};
+
+const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('card-visible');
+            cardObserver.unobserve(entry.target); // anima una volta sola
+        }
+    });
+}, observerOptions);
+
+brandCards.forEach((card, index) => {
+    card.style.transitionDelay = `${(index % 5) * 0.1}s`; // stagger per gruppo di 5
+    cardObserver.observe(card);
+});
