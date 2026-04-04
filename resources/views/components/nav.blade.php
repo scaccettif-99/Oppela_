@@ -24,6 +24,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('contact') }}">Contatti</a>
                     </li>
+                    @auth
+                        @if(in_array(auth()->user()->role, ['admin', 'owner']))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('annunci.create') }}">
+                            <i class="bi bi-plus-circle me-1"></i> Crea annuncio
+                            </a>
+                        </li>
+                        @endif
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('profile.edit') }}">
+                            <i class="bi bi-person-circle me-1"></i> Profilo
+                        </a>
+                    </li>
+                    @endauth
                 </ul>
             </div>
         </div>

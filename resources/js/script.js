@@ -94,3 +94,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+// slide immagini hover card annunci
+document.querySelectorAll('.card-img-wrapper').forEach(wrapper => {
+    const imgs = wrapper.querySelectorAll('.card-slide-img');
+    const dots = wrapper.querySelectorAll('.slide-dot');
+    if (imgs.length <= 1) return;
+
+    let current = 0;
+    let interval = null;
+
+    const goTo = (index) => {
+        imgs[current].classList.remove('active');
+        dots[current]?.classList.remove('active');
+        current = index % imgs.length;
+        imgs[current].classList.add('active');
+        dots[current]?.classList.add('active');
+    };
+
+    wrapper.addEventListener('mouseenter', () => {
+        interval = setInterval(() => {
+            goTo(current + 1);
+        }, 900);
+    });
+
+    wrapper.addEventListener('mouseleave', () => {
+        clearInterval(interval);
+        goTo(0);
+    });
+});

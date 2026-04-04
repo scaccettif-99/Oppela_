@@ -17,14 +17,29 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
 {
-    $annunci = Annuncio::where('user_id', auth()->id())
+    $annunciAttivi = Annuncio::where('user_id', auth()->id())
+                        ->where('stato', 'disponibile')
                         ->with('immagineCopertina')
                         ->orderBy('created_at', 'desc')
                         ->get();
 
+    $annunciVenduti = Annuncio::where('user_id', auth()->id())
+                        ->where('stato', 'venduto')
+                        ->with('immagineCopertina')
+                        ->orderBy('sold_at', 'desc')
+                        ->get();
+
+    $annunciEliminati = Annuncio::onlyTrashed()
+                        ->where('user_id', auth()->id())
+                        ->with('immagineCopertina')
+                        ->orderBy('deleted_at', 'desc')
+                        ->get();
+
     return view('profile.edit', [
-        'user'    => $request->user(),
-        'annunci' => $annunci,
+        'user'             => $request->user(),
+        'annunciAttivi'    => $annunciAttivi,
+        'annunciVenduti'   => $annunciVenduti,
+        'annunciEliminati' => $annunciEliminati,
     ]);
 }
 

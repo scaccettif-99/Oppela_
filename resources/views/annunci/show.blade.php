@@ -63,7 +63,8 @@
                 {{-- bottone WhatsApp pubblico --}}
                 @if($annuncio->stato !== 'venduto')
                     @php
-                        $msg = urlencode("Ciao! Ho visto questo capo sul tuo sito! Sarei interessata ad acquistarlo! Come possiamo metterci d'accordo?");
+                        $url = route('annunci.show', $annuncio);
+                        $msg = urlencode("Ciao! Ho visto questo capo sul tuo sito! Sarei interessata ad acquistarlo! Come possiamo metterci d'accordo? {$url}");
                     @endphp
                     <a href="https://wa.me/+393381520444?text={{ $msg }}"
                         target="_blank"

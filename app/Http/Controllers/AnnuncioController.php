@@ -12,9 +12,9 @@ class AnnuncioController extends Controller
     // lista annunci pubblici
     public function index()
     {
-        $annunci = Annuncio::with('immagineCopertina')
-                    ->orderBy('created_at', 'desc')
-                    ->get();
+        $annunci = Annuncio::with('immagini')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('annunci.index', compact('annunci'));
     }
