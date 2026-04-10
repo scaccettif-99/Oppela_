@@ -469,14 +469,7 @@ body {
 }
 
 .whatsapp-banner::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, #ffffff 0%, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0) 90%, #1a1814 100%);
-    z-index: 2;
+    display: none;
 }
 
 .whatsapp-banner .content {
@@ -897,4 +890,194 @@ body {
 .venduto-stamp-lg {
     font-size: 2.2rem;
     border-width: 5px;
+}
+
+/* CHI SIAMO */
+.chisiamo-hero {
+    position: relative;
+    height: 60vh;
+    overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+    margin-bottom: -4rem;
+}
+
+.chisiamo-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.chisiamo-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 24, 20, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chisiamo-hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #fdfaf5;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.chisiamo-intro {
+    max-width: 700px;
+    margin: 6rem auto 4rem;
+    padding: 0 2rem;
+    text-align: center;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #1a1814;
+}
+
+.chisiamo-sections {
+    margin: 6rem auto 4rem;
+    padding: 2rem 0 4rem;
+}
+
+.chisiamo-row {
+    margin-bottom: 3rem;
+}
+
+.chisiamo-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    overflow: hidden;
+    cursor: default;
+}
+
+.chisiamo-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.chisiamo-img-wrapper:hover img {
+    transform: scale(1.03);
+}
+
+/* caption overlay */
+.chisiamo-caption {
+    position: absolute;
+    top: 0;
+    width: 55%;
+    height: 100%;
+    background: rgba(26, 24, 20, 0.82);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 3;
+}
+
+.caption-from-left {
+    left: 0;
+    transform: translateX(-100%);
+}
+
+.caption-from-right {
+    right: 0;
+    transform: translateX(100%);
+}
+
+.chisiamo-img-wrapper.open .caption-from-left {
+    transform: translateX(0);
+}
+
+.chisiamo-img-wrapper.open .caption-from-right {
+    transform: translateX(0);
+}
+
+.chisiamo-caption-inner {
+    padding: 3rem;
+}
+
+.chisiamo-caption-inner h3 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #feed02;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.1em;
+}
+
+.chisiamo-caption-inner p {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #fdfaf5;
+    margin: 0;
+}
+
+/* video */
+.chisiamo-video-section {
+    padding: 7rem 2rem 6rem;
+    background-color: #1a1814;
+    text-align: center;
+    clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 100%);
+}
+
+.chisiamo-video-title {
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fdfaf5;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    display: inline-block;
+    border-bottom: 2px solid #feed02;
+}
+
+.chisiamo-video-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 50.625%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.chisiamo-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .chisiamo-hero-title {
+        font-size: 2.5rem;
+    }
+
+    .chisiamo-img-wrapper {
+        height: 320px;
+    }
+
+    .chisiamo-caption {
+        width: 100%;
+    }
+
+    .chisiamo-caption-inner {
+        padding: 1.5rem;
+    }
+
+    .chisiamo-caption-inner h3 {
+        font-size: 1.2rem;
+    }
+
+    .chisiamo-caption-inner p {
+        font-size: 0.88rem;
+    }
 }

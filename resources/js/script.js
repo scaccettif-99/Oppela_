@@ -144,4 +144,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // chi siamo — caption automatica allo scroll
+    const chisiamoWrappers = document.querySelectorAll('.chisiamo-img-wrapper');
+    if (chisiamoWrappers.length > 0) {
+        const chisiamoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('open');
+                    }, 300);
+                    chisiamoObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+
+        chisiamoWrappers.forEach(wrapper => {
+            chisiamoObserver.observe(wrapper);
+        });
+    }
+
 });
