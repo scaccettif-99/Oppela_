@@ -22,6 +22,12 @@
             <a href="https://instagram.com/USERQUI" target="_blank" rel="noopener" aria-label="Seguici su Instagram">
                 <i class="bi bi-instagram"></i>
             </a>
+            <a href="https://facebook.com/USERQUI" target="_blank" rel="noopener" aria-label="Seguici su Facebook">
+                <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://facebook.com/USERQUI" target="_blank" rel="noopener" aria-label="Seguici su TikTok">
+                <i class="bi bi-tiktok"></i>
+            </a>
         </div>
         
     </div>

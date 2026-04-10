@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const icon = document.querySelector('.toggler-icon');
     const navbarCollapse = document.querySelector('.navbar-collapse');
     const scrollTopBtn = document.getElementById('scrollTopBtn');
-    const caroSello = document.querySelector('#heroCarousel');
-    const boxesCaption = document.querySelectorAll('.caption-box');
 
     // navbar scroll
     let lastScroll = 0;
@@ -32,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (scrollTopBtn) {
         window.addEventListener('scroll', () => {
             scrollTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
-
             if (navbarCollapse && navbarCollapse.classList.contains('show')) {
                 navbarCollapse.classList.remove('show');
             }
@@ -53,26 +50,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // animazione caption carosello
-    if (caroSello) {
-        const togliAnimaz = () => {
-            boxesCaption.forEach(box => box.classList.remove('animate'));
+    // HERO ACCORDION
+    const heroPanels = document.querySelectorAll('.hero-panel');
+
+    if (heroPanels.length > 0) {
+        const isMobile = () => window.innerWidth <= 768;
+        let autoInterval = null;
+        let currentPanel = 0;
+
+        const activatePanel = (index) => {
+            heroPanels.forEach(p => p.classList.remove('active'));
+            heroPanels[index].classList.add('active');
+            currentPanel = index;
         };
 
-        const animaSlideAttiva = () => {
-            const activeSlide = document.querySelector('.carousel-item.active');
-            if (activeSlide) {
-                const activeCaption = activeSlide.querySelector('.caption-box');
-                if (activeCaption) activeCaption.classList.add('animate');
-            }
+        const startAuto = () => {
+            autoInterval = setInterval(() => {
+                const next = (currentPanel + 1) % heroPanels.length;
+                activatePanel(next);
+            }, 4000);
         };
 
-        animaSlideAttiva();
+        const stopAuto = () => clearInterval(autoInterval);
 
-        caroSello.addEventListener('slid.bs.carousel', () => {
-            togliAnimaz();
-            animaSlideAttiva();
+        heroPanels.forEach((panel, i) => {
+            panel.addEventListener('mouseenter', () => {
+                if (!isMobile()) {
+                    stopAuto();
+                    activatePanel(i);
+                }
+            });
+
+            panel.addEventListener('mouseleave', () => {
+                if (!isMobile()) {
+                    startAuto();
+                }
+            });
+
+            panel.addEventListener('click', () => {
+                if (isMobile()) {
+                    stopAuto();
+                    activatePanel(i);
+                    startAuto();
+                }
+            });
         });
+
+        startAuto();
     }
 
     // intersection observer brand cards
@@ -93,33 +117,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-});
+    // slide immagini hover card annunci
+    document.querySelectorAll('.card-img-wrapper').forEach(wrapper => {
+        const imgs = wrapper.querySelectorAll('.card-slide-img');
+        const dots = wrapper.querySelectorAll('.slide-dot');
+        if (imgs.length <= 1) return;
 
-// slide immagini hover card annunci
-document.querySelectorAll('.card-img-wrapper').forEach(wrapper => {
-    const imgs = wrapper.querySelectorAll('.card-slide-img');
-    const dots = wrapper.querySelectorAll('.slide-dot');
-    if (imgs.length <= 1) return;
+        let current = 0;
+        let interval = null;
 
-    let current = 0;
-    let interval = null;
+        const goTo = (index) => {
+            imgs[current].classList.remove('active');
+            dots[current]?.classList.remove('active');
+            current = index % imgs.length;
+            imgs[current].classList.add('active');
+            dots[current]?.classList.add('active');
+        };
 
-    const goTo = (index) => {
-        imgs[current].classList.remove('active');
-        dots[current]?.classList.remove('active');
-        current = index % imgs.length;
-        imgs[current].classList.add('active');
-        dots[current]?.classList.add('active');
-    };
+        wrapper.addEventListener('mouseenter', () => {
+            interval = setInterval(() => goTo(current + 1), 900);
+        });
 
-    wrapper.addEventListener('mouseenter', () => {
-        interval = setInterval(() => {
-            goTo(current + 1);
-        }, 900);
+        wrapper.addEventListener('mouseleave', () => {
+            clearInterval(interval);
+            goTo(0);
+        });
     });
 
-    wrapper.addEventListener('mouseleave', () => {
-        clearInterval(interval);
-        goTo(0);
-    });
 });
