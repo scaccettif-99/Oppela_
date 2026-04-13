@@ -1,18 +1,22 @@
 <x-layout>
-    
-    {{-- Copertina --}}
+
+    {{-- Hero --}}
     <div class="chisiamo-hero" style="margin-top: 80px;">
-        <img src="img/sanvalentino2.jpg" alt="Chi siamo" class="chisiamo-hero-img">
-        <div class="chisiamo-hero-overlay">
+        <div class="chisiamo-hero-inner">
+            <p class="chisiamo-hero-sub">La nostra storia</p>
             <h1 class="chisiamo-hero-title">Chi siamo</h1>
         </div>
     </div>
-    
-    
+
+    {{-- Intro --}}
+    <section class="chisiamo-intro">
+        <p>Oppela!! nasce nel 2005 nel cuore di Terni, a due passi dalla Basilica di San Valentino, patrono degli innamorati. Non è un caso — perché Oppela!! è un negozio nato dall'amore. L'amore per la moda, per le persone, per la città.</p>
+    </section>
+
     {{-- Sezioni con foto --}}
     <section class="chisiamo-sections">
-        
-        {{-- Sezione 1 — freccia a sinistra, caption entra da sinistra --}}
+
+        {{-- Sezione 1 --}}
         <div class="chisiamo-row">
             <div class="chisiamo-img-wrapper">
                 <img src="img/scarpe.jpg" alt="Le origini">
@@ -24,8 +28,8 @@
                 </div>
             </div>
         </div>
-        
-        {{-- Sezione 2 — freccia a destra, caption entra da destra --}}
+
+        {{-- Sezione 2 --}}
         <div class="chisiamo-row">
             <div class="chisiamo-img-wrapper">
                 <img src="img/paola.jpg" alt="Paola">
@@ -37,8 +41,8 @@
                 </div>
             </div>
         </div>
-        
-        {{-- Sezione 3 — freccia a sinistra, caption entra da sinistra --}}
+
+        {{-- Sezione 3 --}}
         <div class="chisiamo-row">
             <div class="chisiamo-img-wrapper">
                 <img src="img/SanValentino.jpg" alt="La comunità">
@@ -50,21 +54,21 @@
                 </div>
             </div>
         </div>
-        
+
     </section>
-    
+
     {{-- Video --}}
     <section class="chisiamo-video-section">
         <h2 class="chisiamo-video-title">Paola si racconta</h2>
         <div class="chisiamo-video-wrapper">
             <iframe
-            src="https://www.youtube.com/embed/aqo38Fs7Yqg"
-            title="Presentazione Oppela!!"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    </div>
-</section>
+                src="https://www.youtube.com/embed/aqo38Fs7Yqg"
+                title="Presentazione Oppela!!"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </section>
 
 </x-layout>

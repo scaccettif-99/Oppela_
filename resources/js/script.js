@@ -144,6 +144,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // POPUP SORPRESA
+const popup = document.getElementById('sorpresaPopup');
+const popupClose = document.getElementById('popupClose');
+
+if (popup) {
+    // apre dopo 2 secondi
+    setTimeout(() => {
+        popup.classList.add('visible');
+    }, 1000);
+
+    // chiude con la X
+    popupClose.addEventListener('click', () => {
+        popup.classList.remove('visible');
+    });
+
+    // chiude cliccando fuori
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.classList.remove('visible');
+        }
+    });
+
+    // chiude scrollando
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100 && popup.classList.contains('visible')) {
+            popup.classList.remove('visible');
+        }
+    }, { once: false });
+}
+
+// SORPRESA BANNER — effetto pulsate
+const sorpresaTitle = document.getElementById('sorpresaTitle');
+const sorpresaBtn = document.getElementById('sorpresaBtn');
+
+if (sorpresaTitle && sorpresaBtn) {
+    const sorpresaObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                sorpresaTitle.classList.add('pulse');
+                sorpresaBtn.classList.add('pulse');
+
+                setTimeout(() => {
+                    sorpresaTitle.classList.remove('pulse');
+                    sorpresaBtn.classList.remove('pulse');
+                }, 3000);
+
+                sorpresaObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    sorpresaObserver.observe(document.getElementById('sorpresaBanner'));
+}
+
     // chi siamo — caption automatica allo scroll
     const chisiamoWrappers = document.querySelectorAll('.chisiamo-img-wrapper');
     if (chisiamoWrappers.length > 0) {
@@ -162,5 +216,111 @@ document.addEventListener('DOMContentLoaded', () => {
             chisiamoObserver.observe(wrapper);
         });
     }
+// frecce navigazione brand scroll
+document.querySelectorAll('.brand-nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const targetId = btn.dataset.target;
+        const dir = btn.dataset.dir;
+        const wrapper = document.getElementById(targetId);
+        if (!wrapper) return;
+        const scrollAmount = 300;
+        wrapper.scrollBy({
+            left: dir === 'next' ? scrollAmount : -scrollAmount,
+            behavior: 'smooth'
+        });
+    });
+});
+
+// GALLERY — masonry intersection observer
+const galleryItems = document.querySelectorAll('.masonry-item');
+if (galleryItems.length > 0) {
+    const galleryObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('item-visible');
+                }, i * 60);
+                galleryObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    galleryItems.forEach(item => galleryObserver.observe(item));
+}
+
+// LIGHTBOX
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCaption = document.getElementById('lightboxCaption');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
+
+if (lightbox) {
+    let currentItems = [];
+    let currentIndex = 0;
+
+    const openLightbox = (items, index) => {
+        currentItems = items;
+        currentIndex = index;
+        updateLightbox();
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+    };
+
+    const updateLightbox = () => {
+        const item = currentItems[currentIndex];
+        lightboxImg.style.opacity = '0';
+        setTimeout(() => {
+            lightboxImg.src = item.dataset.src;
+            lightboxImg.alt = item.dataset.caption;
+            lightboxCaption.textContent = item.dataset.caption;
+            lightboxImg.style.opacity = '1';
+        }, 150);
+    };
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const section = item.closest('.masonry-grid');
+            const items = Array.from(section.querySelectorAll('.gallery-item'));
+            const index = items.indexOf(item);
+            openLightbox(items, index);
+        });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    lightboxPrev.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length;
+        updateLightbox();
+    });
+
+    lightboxNext.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % currentItems.length;
+        updateLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') {
+            currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length;
+            updateLightbox();
+        }
+        if (e.key === 'ArrowRight') {
+            currentIndex = (currentIndex + 1) % currentItems.length;
+            updateLightbox();
+        }
+    });
+}
 
 });

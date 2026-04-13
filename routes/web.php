@@ -9,6 +9,7 @@ use App\Http\Controllers\PublicController;
 Route::get('/', [PublicController::class, 'homepage'])->name('welcome');
 Route::get('/chi-siamo', [PublicController::class, 'chiSiamo'])->name('chi-siamo');
 Route::get('/contatti', [PublicController::class, 'contact'])->name('contact');
+Route::get('/gallery', [PublicController::class, 'gallery'])->name('gallery');
 
 Route::get('/dashboard', [PublicController::class, 'dashboard'])
     ->middleware(['auth', 'verified'])

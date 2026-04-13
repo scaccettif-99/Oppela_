@@ -1,72 +1,102 @@
 <x-layout>
-    <div class="container py-5" style="margin-top: 80px;">
 
-        <h1 class="mb-5 text-center">Contatti</h1>
+    {{-- Hero --}}
+    <div class="contatti-hero" style="margin-top: 80px;">
+        <div class="contatti-hero-inner">
+            <p class="contatti-hero-sub">Siamo qui per te</p>
+            <h1 class="contatti-hero-title">Contatti</h1>
+            <p class="contatti-hero-address">
+                <i class="bi bi-geo-alt me-2"></i>Viale Papa Zaccaria 1 — Terni
+            </p>
+        </div>
+    </div>
 
-        <div class="row g-4 justify-content-center mb-5">
+    {{-- Contatti cards --}}
+    <section class="contatti-section">
+
+        <div class="contatti-grid">
 
             {{-- WhatsApp --}}
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="card border-0 shadow-sm p-4 text-center h-100">
-                    <i class="bi bi-whatsapp mb-3" style="font-size: 2rem; color: #feed02;"></i>
-                    <h6 class="mb-2">WhatsApp</h6>
-                    <a href="https://wa.me/+393381520444" target="_blank" class="btn mt-2">
-                        Scrivici
-                    </a>
+            <a href="https://wa.me/+393381520444" target="_blank" class="contatti-card">
+                <div class="contatti-card-icon">
+                    <i class="bi bi-whatsapp"></i>
                 </div>
-            </div>
+                <div class="contatti-card-body">
+                    <h3>WhatsApp</h3>
+                    <p>Scrivici direttamente</p>
+                </div>
+                <div class="contatti-card-hover">
+                    <i class="bi bi-whatsapp contatti-hover-icon"></i>
+                    <span>Apri chat</span>
+                </div>
+            </a>
 
             {{-- Instagram --}}
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="card border-0 shadow-sm p-4 text-center h-100">
-                    <i class="bi bi-instagram mb-3" style="font-size: 2rem; color: #feed02;"></i>
-                    <h6 class="mb-2">Instagram</h6>
-                    <a href="https://instagram.com/oppela" target="_blank" class="btn mt-2">
-                        @oppela
-                    </a>
+            <a href="https://instagram.com/oppela" target="_blank" class="contatti-card">
+                <div class="contatti-card-icon">
+                    <i class="bi bi-instagram"></i>
                 </div>
-            </div>
+                <div class="contatti-card-body">
+                    <h3>Instagram</h3>
+                    <p>@oppela</p>
+                </div>
+                <div class="contatti-card-hover">
+                    <i class="bi bi-instagram contatti-hover-icon"></i>
+                    <span>Seguici</span>
+                </div>
+            </a>
 
             {{-- Facebook --}}
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="card border-0 shadow-sm p-4 text-center h-100">
-                    <i class="bi bi-facebook mb-3" style="font-size: 2rem; color: #feed02;"></i>
-                    <h6 class="mb-2">Facebook</h6>
-                    <a href="https://www.facebook.com/oppelaterni" target="_blank" class="btn mt-2">
-                        OPPELA
-                    </a>
+            <a href="https://www.facebook.com/oppelaterni" target="_blank" class="contatti-card">
+                <div class="contatti-card-icon">
+                    <i class="bi bi-facebook"></i>
                 </div>
-            </div>
+                <div class="contatti-card-body">
+                    <h3>Facebook</h3>
+                    <p>OPPELA</p>
+                </div>
+                <div class="contatti-card-hover">
+                    <i class="bi bi-facebook contatti-hover-icon"></i>
+                    <span>Visita la pagina</span>
+                </div>
+            </a>
 
             {{-- Email --}}
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="card border-0 shadow-sm p-4 text-center h-100">
-                    <i class="bi bi-envelope mb-3" style="font-size: 2rem; color: #feed02;"></i>
-                    <h6 class="mb-2">Email</h6>
-                    <a href="mailto:oppela@gmail.com" class="btn mt-2">
-                        oppela@gmail.com
-                    </a>
+            <a href="mailto:oppela@gmail.com" class="contatti-card">
+                <div class="contatti-card-icon">
+                    <i class="bi bi-envelope"></i>
                 </div>
-            </div>
+                <div class="contatti-card-body">
+                    <h3>Email</h3>
+                    <p>oppela@gmail.com</p>
+                </div>
+                <div class="contatti-card-hover">
+                    <i class="bi bi-envelope contatti-hover-icon"></i>
+                    <span>Scrivici</span>
+                </div>
+            </a>
 
             {{-- Telefono --}}
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="card border-0 shadow-sm p-4 text-center h-100">
-                    <i class="bi bi-telephone mb-3" style="font-size: 2rem; color: #feed02;"></i>
-                    <h6 class="mb-2">Telefono</h6>
-                    <a href="tel:+390744123456" class="btn mt-2">
-                        0744 123456
-                    </a>
+            <a href="tel:+390744123456" class="contatti-card">
+                <div class="contatti-card-icon">
+                    <i class="bi bi-telephone"></i>
                 </div>
-            </div>
+                <div class="contatti-card-body">
+                    <h3>Telefono</h3>
+                    <p>0744 123456</p>
+                </div>
+                <div class="contatti-card-hover">
+                    <i class="bi bi-telephone contatti-hover-icon"></i>
+                    <span>Chiamaci</span>
+                </div>
+            </a>
 
         </div>
 
-    </div>
+    </section>
 
     {{-- Banner Orari + Mappa --}}
     <section class="info-section">
-
         <div class="info-orari">
             <h2 class="info-title">Orari di Apertura</h2>
             <ul class="orari-list">
@@ -104,7 +134,6 @@
                 title="Posizione negozio Oppela">
             </iframe>
         </div>
-
     </section>
 
 </x-layout>

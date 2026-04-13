@@ -33,6 +33,14 @@
                         </svg>
                     </a>
                 </li>
+                <li>
+                    <a class="nav-link {{ request()->is('gallery') ? 'active' : '' }}" href="{{ route('gallery') }}">
+                        <span class="nav-link-text">Gallery</span>
+                        <svg class="nav-circle" viewBox="0 0 100 40" preserveAspectRatio="none">
+                            <ellipse cx="50" cy="20" rx="48" ry="17"/>
+                        </svg>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('contatti') ? 'active' : '' }}" href="{{ route('contact') }}">
                         <span class="nav-link-text">Contatti</span>

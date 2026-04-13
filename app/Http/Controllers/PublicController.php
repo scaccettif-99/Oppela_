@@ -25,4 +25,9 @@ class PublicController extends Controller
     {
         return redirect()->route('profile.edit');
     }
+
+    public function gallery()
+{
+    return view('gallery');
+}
 }
