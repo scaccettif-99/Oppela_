@@ -9,15 +9,23 @@
     <link rel="icon" href="img/logo1.png" type="image/png">
 </head>
 <body>
-    <x-nav/>
-
-    <div class="min-vh-100">
-        {{ $slot }}
-    </div>
-
-    <x-footer/>
     <button id="scrollTopBtn" class="btn btn-warning">
         <i class="bi bi-arrow-up-circle-fill" style="font-size: 1.8rem;"></i>
     </button>
+    <a href="https://wa.me/+393381520444" 
+    target="_blank" 
+    rel="noopener"
+    id="whatsappBtn"
+    aria-label="Contattaci su WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+</a>
+    <x-nav/>
+    
+    <div class="min-vh-100">
+        {{ $slot }}
+    </div>
+    
+    <x-footer/>
+    
 </body>
 </html>

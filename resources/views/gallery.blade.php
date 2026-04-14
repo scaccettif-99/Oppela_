@@ -32,11 +32,9 @@
         </div>
         <div class="masonry-grid" data-section="negozio">
             @foreach([
-                'img/modellamarkup.jpg', 'img/modellamarkup1.jpg', 'img/modellamarkup3.jpg',
-                'img/modellamarkup4.jpg', 'img/modellamarkup5.jpg', 'img/abitomarkup.jpg',
-                'img/abitomarkup1.jpg', 'img/cholemodella.jpeg', 'img/cholemodella1.jpeg',
-                'img/cholemodella2.jpeg', 'img/cholemodella3.jpeg', 'img/cholemodella4.jpeg',
-                'img/modellacopains.jpg', 'img/modellacopains1.jpg', 'img/modellacopains2.jpg'
+                'img/negozio0.JPG', 'img/negozio1.JPG', 'img/negozio2.JPG',
+                'img/negozio3.JPG', 'img/negozio4.JPG', 'img/oppela!!.jpg',
+                'img/paola.jpg'
             ] as $img)
                 <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="Il negozio">
                     <img src="{{ asset($img) }}" alt="Il negozio" loading="lazy">
@@ -55,11 +53,9 @@
         </div>
         <div class="masonry-grid" data-section="quartiere">
             @foreach([
-                'img/choleabito.jpeg', 'img/choleabito1.jpeg', 'img/choleabito2.jpeg',
-                'img/choleabito3.jpeg', 'img/choleabito4.jpeg', 'img/abitomarkup3.jpg',
-                'img/abitomarkup4.jpg', 'img/abitomarkup5.jpg', 'img/modellacopains3.jpg',
-                'img/modellacopains4.jpg', 'img/abitocopains.jpg', 'img/abitocopains1.jpg',
-                'img/abitocopains2.jpg', 'img/abitocopains3.jpg', 'img/abitocopains4.jpg'
+                'img/quartiere0.JPG', 'img/quartiere1.JPG', 'img/quartiere2.JPG',
+                'img/quartiere3.JPG', 'img/quartiere4.JPG', 'img/quartiere.JPG',
+                'img/SanValentino.jpg'
             ] as $img)
                 <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="Il quartiere">
                     <img src="{{ asset($img) }}" alt="Il quartiere" loading="lazy">
@@ -78,11 +74,9 @@
         </div>
         <div class="masonry-grid" data-section="iniziative">
             @foreach([
-                'img/modella.jpg', 'img/modella1.jpg', 'img/modella2.jpg',
-                'img/modellamarkup.jpg', 'img/modellamarkup1.jpg', 'img/modellamarkup3.jpg',
-                'img/modellamarkup4.jpg', 'img/cholemodella.jpeg', 'img/cholemodella1.jpeg',
-                'img/cholemodella2.jpeg', 'img/cholemodella3.jpeg', 'img/cholemodella4.jpeg',
-                'img/modellacopains.jpg', 'img/modellacopains1.jpg', 'img/modellacopains2.jpg'
+                'img/SanValentino1.jpg', 'img/sanvalentino2.jpg', 'img/negozio0.JPG',
+                'img/negozio1.JPG', 'img/quartiere0.JPG', 'img/quartiere1.JPG',
+                'img/paola.jpg'
             ] as $img)
                 <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="Le iniziative">
                     <img src="{{ asset($img) }}" alt="Le iniziative" loading="lazy">
@@ -101,11 +95,9 @@
         </div>
         <div class="masonry-grid" data-section="clienti">
             @foreach([
-                'img/abitomarkup.jpg', 'img/abitomarkup1.jpg', 'img/abitomarkup3.jpg',
-                'img/abitomarkup4.jpg', 'img/abitomarkup5.jpg', 'img/choleabito.jpeg',
-                'img/choleabito1.jpeg', 'img/choleabito2.jpeg', 'img/choleabito3.jpeg',
-                'img/choleabito4.jpeg', 'img/abitocopains.jpg', 'img/abitocopains1.jpg',
-                'img/abitocopains2.jpg', 'img/abitocopains3.jpg', 'img/abitocopains4.jpg'
+                'img/negozio2.JPG', 'img/negozio3.JPG', 'img/negozio4.JPG',
+                'img/quartiere2.JPG', 'img/quartiere3.JPG', 'img/quartiere4.JPG',
+                'img/oppela!!.jpg'
             ] as $img)
                 <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="I clienti e gli amici">
                     <img src="{{ asset($img) }}" alt="I clienti e gli amici" loading="lazy">
@@ -114,6 +106,46 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+    </section>
+     {{-- Banner Orari + Mappa --}}
+    <section class="info-section">
+        <div class="info-orari">
+            <h2 class="info-title">Orari di Apertura</h2>
+            <ul class="orari-list">
+                <li>
+                    <span class="orari-giorno">Lunedì mattina</span>
+                    <span class="orari-ore">Chiuso</span>
+                </li>
+                <li>
+                    <span class="orari-giorno">Lunedì pomeriggio</span>
+                    <span class="orari-ore">16:00 — 19.30 </span>
+                </li>
+                <li>
+                    <span class="orari-giorno">Martedì — Sabato</span>
+                    <span class="orari-ore">10:00 — 13:30 / 16.00 — 19:30</span>
+                </li>
+                <li>
+                    <span class="orari-giorno">Domenica</span>
+                    <span class="orari-ore">Chiuso</span>
+                </li>
+            </ul>
+            <a href="https://wa.me/+393381520444" target="_blank" rel="noopener" class="btn info-btn">
+                <i class="bi bi-whatsapp me-2"></i>Contattaci su WhatsApp
+            </a>
+        </div>
+
+        <div class="info-mappa">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2934.1!2d12.6469!3d42.5630!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sViale+Papa+Zaccaria+1%2C+05100+Terni+TR!5e0!3m2!1sit!2sit!4v1"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Posizione negozio Oppela">
+            </iframe>
         </div>
     </section>
 

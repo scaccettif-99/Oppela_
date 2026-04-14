@@ -10,22 +10,22 @@
         {{-- Link navigazione --}}
         <nav class="footer-nav" aria-label="Footer navigation">
             <a href="{{ route('welcome') }}">Home</a>
-            <a href="{{ url('/gallery') }}">Gallery</a>
+            <a href="{{ route('gallery') }}">Gallery</a>
             <a href="{{ route('contact') }}">Contatti</a>
         </nav>
         
         {{-- Social / WhatsApp --}}
         <div class="footer-social">
-            <a href="https://wa.me/39NUMEROQUI" target="_blank" rel="noopener" aria-label="Contattaci su WhatsApp">
+            <a href="https://wa.me/+393381520444" target="_blank" rel="noopener" aria-label="Contattaci su WhatsApp">
                 <i class="bi bi-whatsapp"></i>
             </a>
-            <a href="https://instagram.com/USERQUI" target="_blank" rel="noopener" aria-label="Seguici su Instagram">
+            <a href="https://instagram.com/oppela" target="_blank" rel="noopener" aria-label="Seguici su Instagram">
                 <i class="bi bi-instagram"></i>
             </a>
-            <a href="https://facebook.com/USERQUI" target="_blank" rel="noopener" aria-label="Seguici su Facebook">
+            <a href="https://www.facebook.com/oppelaterni" target="_blank" rel="noopener" aria-label="Seguici su Facebook">
                 <i class="bi bi-facebook"></i>
             </a>
-            <a href="https://facebook.com/USERQUI" target="_blank" rel="noopener" aria-label="Seguici su TikTok">
+            <a href="https://www.tiktok.com/@oppelapaolatinarelli75" target="_blank" rel="noopener" aria-label="Seguici su TikTok">
                 <i class="bi bi-tiktok"></i>
             </a>
         </div>

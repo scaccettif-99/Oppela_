@@ -78,7 +78,7 @@
         </div>
     </div>
     @empty
-    <p class="text-muted">Nessun annuncio disponibile.</p>
+    <p class="text-muted">Nessun annuncio disponibile. Questa pagina sarà attiva a breve.</p>
     @endforelse
 </div>
 </div>

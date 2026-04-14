@@ -19,7 +19,7 @@
         {{-- Sezione 1 --}}
         <div class="chisiamo-row">
             <div class="chisiamo-img-wrapper">
-                <img src="img/scarpe.jpg" alt="Le origini">
+                <img src="img/negozio2.jpg" alt="Le origini" class="chisiamo-banner-img" >
                 <div class="chisiamo-caption caption-from-left">
                     <div class="chisiamo-caption-inner">
                         <h3>Le origini</h3>
@@ -32,7 +32,7 @@
         {{-- Sezione 2 --}}
         <div class="chisiamo-row">
             <div class="chisiamo-img-wrapper">
-                <img src="img/paola.jpg" alt="Paola">
+                <img src="img/paola.jpg" alt="Paola" class="chisiamo-banner-img">
                 <div class="chisiamo-caption caption-from-right">
                     <div class="chisiamo-caption-inner">
                         <h3>La persona dietro il negozio</h3>
@@ -45,7 +45,7 @@
         {{-- Sezione 3 --}}
         <div class="chisiamo-row">
             <div class="chisiamo-img-wrapper">
-                <img src="img/SanValentino.jpg" alt="La comunità">
+                <img src="img/quartiere2.jpg" alt="La comunità">
                 <div class="chisiamo-caption caption-from-left">
                     <div class="chisiamo-caption-inner">
                         <h3>Una comunità, non solo un negozio</h3>
@@ -67,6 +67,47 @@
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+
+    {{-- Banner Orari + Mappa --}}
+    <section class="info-section">
+        <div class="info-orari">
+            <h2 class="info-title">Orari di Apertura</h2>
+            <ul class="orari-list">
+                <li>
+                    <span class="orari-giorno">Lunedì mattina</span>
+                    <span class="orari-ore">Chiuso</span>
+                </li>
+                <li>
+                    <span class="orari-giorno">Lunedì pomeriggio</span>
+                    <span class="orari-ore">16:00 — 19.30 </span>
+                </li>
+                <li>
+                    <span class="orari-giorno">Martedì — Sabato</span>
+                    <span class="orari-ore">10:00 — 13:30 / 16.00 — 19:30</span>
+                </li>
+                <li>
+                    <span class="orari-giorno">Domenica</span>
+                    <span class="orari-ore">Chiuso</span>
+                </li>
+            </ul>
+            <a href="https://wa.me/+393381520444" target="_blank" rel="noopener" class="btn info-btn">
+                <i class="bi bi-whatsapp me-2"></i>Contattaci su WhatsApp
+            </a>
+        </div>
+
+        <div class="info-mappa">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2934.1!2d12.6469!3d42.5630!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sViale+Papa+Zaccaria+1%2C+05100+Terni+TR!5e0!3m2!1sit!2sit!4v1"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Posizione negozio Oppela">
             </iframe>
         </div>
     </section>

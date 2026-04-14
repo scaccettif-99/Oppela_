@@ -77,13 +77,13 @@
             </a>
 
             {{-- Telefono --}}
-            <a href="tel:+390744123456" class="contatti-card">
+            <a href="tel:+393381520444" class="contatti-card">
                 <div class="contatti-card-icon">
                     <i class="bi bi-telephone"></i>
                 </div>
                 <div class="contatti-card-body">
                     <h3>Telefono</h3>
-                    <p>0744 123456</p>
+                    <p>338 152 0444</p>
                 </div>
                 <div class="contatti-card-hover">
                     <i class="bi bi-telephone contatti-hover-icon"></i>
@@ -101,16 +101,16 @@
             <h2 class="info-title">Orari di Apertura</h2>
             <ul class="orari-list">
                 <li>
-                    <span class="orari-giorno">Lunedì</span>
+                    <span class="orari-giorno">Lunedì mattina</span>
                     <span class="orari-ore">Chiuso</span>
                 </li>
                 <li>
-                    <span class="orari-giorno">Martedì — Venerdì</span>
-                    <span class="orari-ore">09:00 — 13:00 / 15:30 — 19:30</span>
+                    <span class="orari-giorno">Lunedì pomeriggio</span>
+                    <span class="orari-ore">16:00 — 19.30 </span>
                 </li>
                 <li>
-                    <span class="orari-giorno">Sabato</span>
-                    <span class="orari-ore">09:00 — 13:00 / 15:30 — 19:30</span>
+                    <span class="orari-giorno">Martedì — Sabato</span>
+                    <span class="orari-ore">10:00 — 13:30 / 16.00 — 19:30</span>
                 </li>
                 <li>
                     <span class="orari-giorno">Domenica</span>

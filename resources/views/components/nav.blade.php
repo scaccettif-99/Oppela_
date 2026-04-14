@@ -18,16 +18,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('annunci*') ? 'active' : '' }}" href="{{ route('annunci.index') }}">
-                        <span class="nav-link-text">Shop</span>
+                    <a class="nav-link {{ request()->is('chi-siamo') ? 'active' : '' }}" href="{{ route('chi-siamo') }}">
+                        <span class="nav-link-text">Chi siamo</span>
                         <svg class="nav-circle" viewBox="0 0 100 40" preserveAspectRatio="none">
                             <ellipse cx="50" cy="20" rx="48" ry="17"/>
                         </svg>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('chi-siamo') ? 'active' : '' }}" href="{{ route('chi-siamo') }}">
-                        <span class="nav-link-text">Chi siamo</span>
+                    <a class="nav-link {{ request()->is('annunci*') ? 'active' : '' }}" href="{{ route('annunci.index') }}">
+                        <span class="nav-link-text">Shop</span>
                         <svg class="nav-circle" viewBox="0 0 100 40" preserveAspectRatio="none">
                             <ellipse cx="50" cy="20" rx="48" ry="17"/>
                         </svg>
