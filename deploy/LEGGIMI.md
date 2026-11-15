@@ -1,8 +1,8 @@
 # Messa online di Oppela!! su DigitalOcean
 
-Il repository GitHub è privato: il codice si invia dal PC al server via SSH,
-in un archivio git sul server (`/srv/oppela.git`). Tutti i comandi vanno dati da
-**Git Bash** nella cartella del progetto. Sostituisci `IP` con l'indirizzo della Droplet.
+Il server scarica il codice dal repository pubblico su GitHub
+(`scaccettif-99/Oppela_`). I comandi vanno dati da **Git Bash** nella cartella
+del progetto. Sostituisci `IP` con l'indirizzo della Droplet.
 
 ## 1. Creare la Droplet (una volta)
 
@@ -17,25 +17,16 @@ Su DigitalOcean: **Create → Droplets**
 ## 2. Installazione (una volta)
 
 ```bash
-# archivio git sul server
-ssh root@IP "apt-get update -y && apt-get install -y git && git init --bare --initial-branch=main /srv/oppela.git"
-
-# invio del codice
-git remote add server root@IP:/srv/oppela.git
-git push server main
-
-# installazione completa (10-15 minuti)
-scp deploy/installa-server.sh root@IP:/root/
-ssh root@IP "bash /root/installa-server.sh"
+ssh root@IP "curl -fsSLo installa.sh https://raw.githubusercontent.com/scaccettif-99/Oppela_/main/deploy/installa-server.sh && bash installa.sh"
 ```
 
-Alla fine lo script stampa l'indirizzo del sito e il **codice invito** per la registrazione di Paola.
+Ci vogliono 10-15 minuti. Alla fine lo script stampa l'indirizzo del sito
+e il **codice invito** per la registrazione di Paola.
 
 ## 3. Aggiornare il sito
 
 ```bash
-git push origin main      # salvataggio su GitHub
-git push server main      # invio al server
+git push origin main
 ssh root@IP "bash /var/www/oppela/deploy/aggiorna.sh"
 ```
 

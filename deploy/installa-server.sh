@@ -3,8 +3,8 @@
 #  Oppela!! - installazione completa su una Droplet DigitalOcean nuova
 #  (Ubuntu 24.04 LTS). Da eseguire UNA VOLTA come root:
 #
-#     bash installa-server.sh
-#  (prima va inviato il codice in /srv/oppela.git: vedi deploy/LEGGIMI.md)
+#     curl -fsSLo installa.sh https://raw.githubusercontent.com/scaccettif-99/Oppela_/main/deploy/installa-server.sh
+#     bash installa.sh
 #
 #  Installa nginx, PHP 8.3, MySQL, Composer, Node 22; scarica il sito,
 #  crea database e file .env, compila gli stili, esegue le migrazioni,
@@ -13,9 +13,8 @@
 # =============================================================================
 set -euo pipefail
 
-# provenienza del codice: il repository GitHub è privato, quindi di norma il codice
-# viene inviato dal PC di sviluppo in /srv/oppela.git (vedi deploy/LEGGIMI.md)
-REPO="${REPO:-/srv/oppela.git}"
+# provenienza del codice (repository pubblico su GitHub; si può cambiare con REPO=...)
+REPO="${REPO:-https://github.com/scaccettif-99/Oppela_.git}"
 APP_DIR="/var/www/oppela"
 DB_NAME="oppela"
 DB_USER="oppela"
