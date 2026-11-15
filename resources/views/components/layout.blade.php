@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>Oppela! Abbigliamento</title>
-    <link rel="icon" href="img/logo1.png" type="image/png">
+    <link rel="icon" href="{{ asset('media/logo1.png') }}" type="image/png">
 </head>
 <body>
     <button id="scrollTopBtn" class="btn btn-warning">

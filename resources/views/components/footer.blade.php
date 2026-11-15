@@ -33,6 +33,14 @@
     </div>
     
     <div class="footer-bottom">
-        <span>&copy; {{ date('Y') }} Oppela!! &mdash; Tutti i diritti riservati</span>
+        <span>&copy; {{ date('Y') }} Oppela!! di {{ config('oppela.negozio.titolare') }} &mdash; Tutti i diritti riservati</span>
+        <span class="footer-legale">
+            {{ config('oppela.negozio.indirizzo') }}
+            @if(config('oppela.negozio.piva'))
+                &middot; P.IVA {{ config('oppela.negozio.piva') }}
+            @endif
+            &middot; <a href="{{ route('privacy') }}">Privacy e cookie policy</a>
+        </span>
+        <span class="footer-credito">Sito creato da Francesco Scaccetti Web Dev</span>
     </div>
 </footer>

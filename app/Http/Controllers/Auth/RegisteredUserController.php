@@ -34,6 +34,16 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            // codice invito, se configurato sul server
+            'codice' => config('oppela.codice_registrazione')
+                ? ['required', 'string', function ($attr, $valore, $fallisci) {
+                    if (! hash_equals((string) config('oppela.codice_registrazione'), (string) $valore)) {
+                        $fallisci('Il codice invito non è corretto.');
+                    }
+                }]
+                : ['nullable'],
+        ], [
+            'codice.required' => 'Inserisci il codice invito.',
         ]);
 
         $user = User::create([

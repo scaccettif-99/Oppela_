@@ -6,7 +6,7 @@
             <p class="contatti-hero-sub">Siamo qui per te</p>
             <h1 class="contatti-hero-title">Contatti</h1>
             <p class="contatti-hero-address">
-                <i class="bi bi-geo-alt me-2"></i>Viale Papa Zaccaria 1 — Terni
+                <i class="bi bi-geo-alt me-2"></i>Viale Papa Zaccaria 1/A — Terni
             </p>
         </div>
     </div>
@@ -62,13 +62,13 @@
             </a>
 
             {{-- Email --}}
-            <a href="mailto:oppela@gmail.com" class="contatti-card">
+            <a href="mailto:oppela.tr@gmail.com" class="contatti-card">
                 <div class="contatti-card-icon">
                     <i class="bi bi-envelope"></i>
                 </div>
                 <div class="contatti-card-body">
                     <h3>Email</h3>
-                    <p>oppela@gmail.com</p>
+                    <p>oppela.tr@gmail.com</p>
                 </div>
                 <div class="contatti-card-hover">
                     <i class="bi bi-envelope contatti-hover-icon"></i>
@@ -122,18 +122,7 @@
             </a>
         </div>
 
-        <div class="info-mappa">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2934.1!2d12.6469!3d42.5630!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sViale+Papa+Zaccaria+1%2C+05100+Terni+TR!5e0!3m2!1sit!2sit!4v1"
-                width="100%"
-                height="100%"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Posizione negozio Oppela">
-            </iframe>
-        </div>
+        @include('partials.mappa')
     </section>
 
 </x-layout>

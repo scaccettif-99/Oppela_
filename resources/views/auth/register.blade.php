@@ -47,6 +47,16 @@
                                     required autocomplete="new-password">
                         </div>
 
+                        @if(config('oppela.codice_registrazione'))
+                            <div class="mb-4">
+                                <label for="codice" class="form-label small text-muted">Codice invito</label>
+                                <input id="codice" type="text" name="codice" class="form-control" required autocomplete="off">
+                                @error('codice')
+                                    <div class="text-danger small mt-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        @endif
+
                         <button type="submit" class="btn w-100 mb-3">Registrati</button>
 
                         <div class="text-center">

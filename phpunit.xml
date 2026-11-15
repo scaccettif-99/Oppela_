@@ -19,6 +19,8 @@
     </source>
     <php>
         <env name="APP_ENV" value="testing"/>
+        <!-- pagine compilate dei test separate da quelle del server acceso (su Windows si bloccano a vicenda) -->
+        <env name="VIEW_COMPILED_PATH" value="storage/framework/views-test"/>
         <env name="APP_MAINTENANCE_DRIVER" value="file"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="BROADCAST_CONNECTION" value="null"/>

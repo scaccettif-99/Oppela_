@@ -3,221 +3,158 @@
     <div class="popup-overlay" id="sorpresaPopup">
         <div class="popup-box">
             <button class="popup-close" id="popupClose">&times;</button>
-            <img src="img/logo.jpg" alt="Oppela" class="popup-logo">
+            <img src="{{ asset('media/logo.jpg') }}" alt="Oppela" class="popup-logo">
             <h3>Scorri verso il basso per ricevere una sorpresa in omaggio!</h3>
             <i class="bi bi-chevron-double-down popup-arrow"></i>
         </div>
     </div>
-    <!-- Hero Accordion -->
+    <!-- Hero Accordion: foto e testi modificabili da "Personalizza home" -->
     <div class="hero-accordion" style="margin-top: 80px;">
-        
-        <!-- Slide 1 -->
-        <div class="hero-panel active" data-index="0">
-            <div class="hero-panel-color">
-                <div class="hero-panel-content">
-                    <h1>Collezione<br>primavera estate</h1>
-                    <p>Scopri le nostre collezioni</p>
-                    <a href="{{ url('/#brand-section-spring') }}" class="btn">Scopri</a>
+        @foreach($slides as $i => $slide)
+            <div class="hero-panel {{ $i === 0 ? 'active' : '' }}" data-index="{{ $i }}">
+                <div class="hero-panel-color">
+                    <div class="hero-panel-content">
+                        <h1>{!! nl2br(e($slide->titolo)) !!}</h1>
+                        @if($slide->sottotitolo)
+                            <p>{{ $slide->sottotitolo }}</p>
+                        @endif
+                        <a href="{{ $slide->href }}" class="btn">Scopri</a>
+                    </div>
+                </div>
+                <div class="hero-panel-img">
+                    <img src="{{ $slide->immagine_url }}"
+                            alt="{{ preg_replace('/\s+/', ' ', $slide->titolo) }}"
+                            style="object-position: {{ $slide->posizione_focus }};">
                 </div>
             </div>
-            <div class="hero-panel-img">
-                <img src="img/modella.jpg" alt="Abbigliamento donna">
-            </div>
-        </div>
-        
-        <!-- Slide 2 -->
-        <div class="hero-panel" data-index="1">
-            <div class="hero-panel-color">
-                <div class="hero-panel-content">
-                    <h1>Collezione<br>autunno inverno</h1>
-                    <p>Scopri i capi della stagione fredda</p>
-                    <a href="{{ url('/#brand-section-fall') }}" class="btn">Scopri</a>
-                </div>
-            </div>
-            <div class="hero-panel-img">
-                <img src="img/modella1.jpg" alt="Primavera Estate">
-            </div>
-        </div>
-        
-        <!-- Slide 3 -->
-        <div class="hero-panel" data-index="2">
-            <div class="hero-panel-color">
-                <div class="hero-panel-content">
-                    <h1>Collezione<br>accessori</h1>
-                    <p>Borse, cinte, gioielli da abbinare ai tuoi outfit</p>
-                    <a href="{{ url('/#brand-section-acc') }}" class="btn">Scopri</a>
-                </div>
-            </div>
-            <div class="hero-panel-img">
-                <img src="img/modella2.jpg" alt="Autunno Inverno">
-            </div>
-        </div>
-        
+        @endforeach
     </div>
-    
+
     <!-- Sezione Brand -->
     <section class="brands-section">
         
-        {{-- Capi in evidenza PE --}}
-        <div class="brand-row"  id="brand-section-spring">
+        {{-- Capi in evidenza: scelti da Paola, poi ultimi annunci, poi foto di riserva --}}
+        @php
+            $riserva = array_slice(\App\Models\Annuncio::EVIDENZA_DEFAULT, 0, max(0, \App\Models\Annuncio::EVIDENZA_MIN - $evidenza->count()));
+        @endphp
+        <div class="brand-row" id="capi-in-evidenza">
             <div class="brand-row-header">
                 <div>
                     <h2 class="brand-row-title">Capi in evidenza</h2>
-                    <p class="brand-row-subtitle">Collezione Primavera Estate</p>
                 </div>
+                <a href="{{ route('annunci.index') }}" class="brand-shop-cta">
+                    Vai allo shop <i class="bi bi-arrow-right"></i>
+                </a>
                 <div class="brand-row-nav">
-                    <button class="brand-nav-btn" data-target="scroll-pe" data-dir="prev">
+                    <button class="brand-nav-btn" data-target="scroll-evidenza" data-dir="prev" aria-label="Indietro">
                         <i class="bi bi-chevron-left"></i>
                     </button>
-                    <button class="brand-nav-btn" data-target="scroll-pe" data-dir="next">
+                    <button class="brand-nav-btn" data-target="scroll-evidenza" data-dir="next" aria-label="Avanti">
                         <i class="bi bi-chevron-right"></i>
                     </button>
                 </div>
             </div>
-            <div class="brand-scroll-wrapper" id="scroll-pe">
+            <div class="brand-scroll-wrapper" id="scroll-evidenza">
                 <div class="brand-scroll">
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/modellamarkup.jpg" alt="Modella">
-                        <img class="img-secondary" src="img/abitomarkup.jpg" alt="Vestito">
-                    </div>
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/modellamarkup1.jpg" alt="Modella">
-                        <img class="img-secondary" src="img/abitomarkup1.jpg" alt="Vestito">
-                    </div>
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/modellamarkup5.jpg" alt="Modella">
-                        <img class="img-secondary" src="img/abitomarkup5.jpg" alt="Vestito">
-                    </div>
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/modellamarkup3.jpg" alt="Modella">
-                        <img class="img-secondary" src="img/abitomarkup3.jpg" alt="Vestito">
-                    </div>
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/modellamarkup4.jpg" alt="Modella">
-                        <img class="img-secondary" src="img/abitomarkup4.jpg" alt="Vestito">
-                    </div>
+                    @foreach($evidenza as $capo)
+                        <a href="{{ route('annunci.show', $capo) }}" class="brand-card evidenza-card">
+                            <span class="brand-badge">In evidenza</span>
+                            <img class="img-primary" src="{{ Storage::url($capo->immagini[0]->path) }}" alt="{{ $capo->titolo }} indossato" loading="lazy">
+                            <img class="img-secondary" src="{{ Storage::url($capo->immagini[1]->path) }}" alt="{{ $capo->titolo }}" loading="lazy">
+                            <span class="evidenza-dettaglio">
+                                <span class="evidenza-dettaglio-nome">{{ $capo->titolo }}</span>
+                                <span class="evidenza-dettaglio-cta">Vai al dettaglio <i class="bi bi-arrow-right"></i></span>
+                            </span>
+                        </a>
+                    @endforeach
+
+                    @foreach($riserva as [$modella, $prodotto])
+                        <a href="{{ route('annunci.index') }}" class="brand-card evidenza-card">
+                            <span class="brand-badge">In evidenza</span>
+                            <img class="img-primary" src="{{ asset('media/' . $modella) }}" alt="Modella" loading="lazy">
+                            <img class="img-secondary" src="{{ asset('media/' . $prodotto) }}" alt="Capo" loading="lazy">
+                            <span class="evidenza-dettaglio">
+                                <span class="evidenza-dettaglio-cta">Scopri lo shop <i class="bi bi-arrow-right"></i></span>
+                            </span>
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </div>
-        
-        {{-- Autunno Inverno --}}
-        <div class="brand-row" id="brand-section-fall">
+
+        {{-- Set fotografico Primavera Estate 2026 --}}
+        <div class="brand-row" id="set-fotografico">
             <div class="brand-row-header">
                 <div>
-                    <h2 class="brand-row-title">Capi in evidenza</h2>
-                    <p class="brand-row-subtitle">Collezione Autunno Inverno</p>
+                    <h2 class="brand-row-title">Set fotografico collezione primavera estate 2026</h2>
+                    <p class="brand-row-subtitle">Modella Annalisa Petrini</p>
                 </div>
+                <a href="{{ route('annunci.index') }}" class="brand-shop-cta">
+                    Vai allo shop <i class="bi bi-arrow-right"></i>
+                </a>
                 <div class="brand-row-nav">
-                    <button class="brand-nav-btn" data-target="scroll-ai" data-dir="prev">
+                    <button class="brand-nav-btn" data-target="scroll-pe26" data-dir="prev">
                         <i class="bi bi-chevron-left"></i>
                     </button>
-                    <button class="brand-nav-btn" data-target="scroll-ai" data-dir="next">
+                    <button class="brand-nav-btn" data-target="scroll-pe26" data-dir="next">
                         <i class="bi bi-chevron-right"></i>
                     </button>
                 </div>
             </div>
-            <div class="brand-scroll-wrapper" id="scroll-ai">
-                <div class="brand-scroll">
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/modellacopains.jpg" alt="Modella">
-                        <img class="img-secondary" src="img/abitocopains.jpg" alt="Vestito">
-                    </div>
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/modellacopains1.jpg" alt="Modella">
-                        <img class="img-secondary" src="img/abitocopains1.jpg" alt="Vestito">
-                    </div>
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/modellacopains2.jpg" alt="Modella">
-                        <img class="img-secondary" src="img/abitocopains2.jpg" alt="Vestito">
-                    </div>
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/modellacopains3.jpg" alt="Modella">
-                        <img class="img-secondary" src="img/abitocopains3.jpg" alt="Vestito">
-                    </div>
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/modellacopains4.jpg" alt="Modella">
-                        <img class="img-secondary" src="img/abitocopains4.jpg" alt="Vestito">
-                    </div>
-                </div>
-            </div>
+            @include('partials.collezione-pe26', ['scrollId' => 'scroll-pe26'])
         </div>
-        
-        {{-- Accessori --}}
-        <div class="brand-row" id="brand-section-acc">
-            <div class="brand-row-header">
-                <div>
-                    <h2 class="brand-row-title">Accessori</h2>
-                    <p class="brand-row-subtitle">Collezione Accessori</p>
-                </div>
-                <div class="brand-row-nav">
-                    <button class="brand-nav-btn" data-target="scroll-acc" data-dir="prev">
-                        <i class="bi bi-chevron-left"></i>
-                    </button>
-                    <button class="brand-nav-btn" data-target="scroll-acc" data-dir="next">
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="brand-scroll-wrapper" id="scroll-acc">
-                <div class="brand-scroll">
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/cholemodella1.jpeg" alt="Modella">
-                        <img class="img-secondary" src="img/choleabito1.jpeg" alt="Vestito">
-                    </div>
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/cholemodella.jpeg" alt="Modella">
-                        <img class="img-secondary" src="img/choleabito.jpeg" alt="Vestito">
-                    </div>
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/cholemodella2.jpeg" alt="Modella">
-                        <img class="img-secondary" src="img/choleabito2.jpeg" alt="Vestito">
-                    </div>
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/cholemodella3.jpeg" alt="Modella">
-                        <img class="img-secondary" src="img/choleabito3.jpeg" alt="Vestito">
-                    </div>
-                    <div class="brand-card">
-                        <span class="brand-badge">In evidenza</span>
-                        <img class="img-primary" src="img/cholemodella4.jpeg" alt="Modella">
-                        <img class="img-secondary" src="img/choleabito4.jpeg" alt="Vestito">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        {{-- Titolo e loghi brand --}}
+
+        {{-- Titolo e loghi brand: striscia in scorrimento continuo, gestita da "Personalizza home" --}}
+        @if($loghi->isNotEmpty())
+        @php
+            // ripetizioni della serie di loghi: abbastanza da riempire anche uno schermo molto largo
+            $larghezzaSerie = $loghi->sum(fn ($l) => $l->dimensioniSchermo()[0] + 64) + 64;
+            $copie = max(4, (int) ceil(2600 / max(1, $larghezzaSerie)) + 1);
+        @endphp
         <div class="brands-header">
             <h1 class="brands-main-title">I brand che troverai in negozio</h1>
-            <div class="brands-logos-strip">
-                <div class="brand-logo-item">
-                    <img src="img/markup.png" alt="Mark Up">
-                </div>
-                <div class="brand-logo-item">
-                    <img src="img/sarachole.png" alt="Sara Chole">
-                </div>
-                <div class="brand-logo-item">
-                    <img src="img/Lescopains.jpg" alt="Les Copains">
+            <div class="brands-marquee">
+                <div class="brands-marquee-track" style="--copie: {{ $copie }};">
+                    {{-- solo la prima serie è letta dagli screen reader --}}
+                    @foreach(range(1, $copie) as $copia)
+                        <ul class="brands-marquee-group" @if($copia > 1) aria-hidden="true" @endif>
+                            @foreach($loghi as $logo)
+                                @php [$lw, $lh] = $logo->dimensioniSchermo(); @endphp
+                                <li class="brand-logo-item">
+                                    <img src="{{ $logo->url }}" width="{{ $lw }}" height="{{ $lh }}"
+                                            style="width: {{ $lw }}px; height: {{ $lh }}px;"
+                                            alt="{{ $copia === 1 ? $logo->nome : '' }}">
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endforeach
                 </div>
             </div>
         </div>
-        
+        @endif
+
     </section>
+    {{-- Clienti soddisfatte: anteprima, le altre foto sono nella gallery --}}
+    <section class="home-clienti">
+        <div class="home-clienti-inner">
+            <h2 class="home-clienti-title">Clienti soddisfatte</h2>
+            <div class="home-clienti-grid">
+                @foreach([2, 5, 8, 13] as $n)
+                    <a href="{{ route('gallery') }}#clienti-soddisfatte" class="home-clienti-item">
+                        <img src="{{ asset('media/client_' . $n . '.jpg') }}" alt="Cliente soddisfatta di Oppela!!" loading="lazy">
+                    </a>
+                @endforeach
+            </div>
+            <a href="{{ route('gallery') }}#clienti-soddisfatte" class="btn home-clienti-btn">
+                Scopri di più <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+        </div>
+    </section>
+
     <!-- Banner WhatsApp Sorpresa -->
-    <section class="whatsapp-banner" id="sorpresaBanner">
+    {{-- l'immagine di sfondo è passata da qui (e non scritta nel CSS) così l'indirizzo è sempre quello del sito --}}
+    <section class="whatsapp-banner" id="sorpresaBanner"
+            style="--sorpresa-bg: url('{{ asset('media/SanValentino.jpg') }}');">
         <div class="content">
             <h3 class="sorpresa-title" id="sorpresaTitle">Complimenti: ecco la tua sorpresa!</h3>
             <p style="color: #fdfaf5; margin-bottom: 1.5rem; position: relative; z-index: 3;">
@@ -346,18 +283,7 @@
             </a>
         </div>
 
-        <div class="info-mappa">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2934.1!2d12.6469!3d42.5630!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sViale+Papa+Zaccaria+1%2C+05100+Terni+TR!5e0!3m2!1sit!2sit!4v1"
-                width="100%"
-                height="100%"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Posizione negozio Oppela">
-            </iframe>
-        </div>
+        @include('partials.mappa')
     </section>
 
 </x-layout>

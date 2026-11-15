@@ -1,85 +1,74 @@
 <x-layout>
     <div class="container py-5" style="margin-top: 80px;">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1>Annunci</h1>
+            <h1>Shop</h1>
             @if(auth()->check() && in_array(auth()->user()->role, ['admin', 'owner']))
-            <a href="{{ route('annunci.create') }}" class="btn">
-                <i class="bi bi-plus-lg me-1"></i> Nuovo annuncio
-            </a>
+                <a href="{{ route('annunci.create') }}" class="btn">
+                    <i class="bi bi-plus-lg me-1"></i> Nuovo annuncio
+                </a>
             @endif
         </div>
-        
+
         @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+            <div class="alert alert-success">{{ session('success') }}</div>
         @endif
-        
-        <div class="row g-4">
-            @forelse($annunci as $annuncio)
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm position-relative annuncio-card">
-                    
-                    {{-- slide immagini --}}
-                    <div class="card-img-wrapper position-relative overflow-hidden"
-                            style="height: 320px;">
-                    @if($annuncio->immagini->count())
-                    @foreach($annuncio->immagini as $i => $immagine)
-                        <img src="{{ Storage::url($immagine->path) }}"
-                            class="card-slide-img {{ $i === 0 ? 'active' : '' }}"
-                            style="{{ $annuncio->stato === 'venduto' ? 'filter: grayscale(100%)' : '' }}"
-                            alt="{{ $annuncio->titolo }}">
+
+        {{-- Filtri: categoria e ordinamento prezzo, combinabili --}}
+        @if(count($categorieFiltro))
+            <form method="GET" action="{{ route('annunci.index') }}" class="shop-filtri" id="shopFiltri">
+                <div class="shop-filtri-categorie" role="group" aria-label="Filtra per categoria">
+                    <input type="radio" class="btn-check" name="categoria" id="cat-tutte" value=""
+                            {{ $categoria ? '' : 'checked' }}>
+                    <label class="shop-pill" for="cat-tutte">Tutte</label>
+
+                    @foreach($categorieFiltro as $slug => $label)
+                        <input type="radio" class="btn-check" name="categoria" id="cat-{{ $slug }}" value="{{ $slug }}"
+                                {{ $categoria === $slug ? 'checked' : '' }}>
+                        <label class="shop-pill" for="cat-{{ $slug }}">{{ $label }}</label>
                     @endforeach
-                    
-                    @if($annuncio->immagini->count() > 1)
-                    <div class="card-slide-dots">
-                        @foreach($annuncio->immagini as $i => $immagine)
-                        <span class="slide-dot {{ $i === 0 ? 'active' : '' }}"></span>
-                        @endforeach
-                    </div>
-                    @endif
-                    
-                    @if($annuncio->stato === 'venduto')
-                    <div class="venduto-stamp">VENDUTO</div>
-                    @endif
+                </div>
+
+                <div class="shop-filtri-azioni">
+                    <label class="visually-hidden" for="ordinePrezzo">Ordina per prezzo</label>
+                    <select name="prezzo" id="ordinePrezzo" class="form-select form-select-sm">
+                        <option value="" {{ $prezzo ? '' : 'selected' }}>Ordina: più recenti</option>
+                        <option value="asc" {{ $prezzo === 'asc' ? 'selected' : '' }}>Prezzo: dal meno costoso</option>
+                        <option value="desc" {{ $prezzo === 'desc' ? 'selected' : '' }}>Prezzo: dal più costoso</option>
+                    </select>
+
+                    <noscript><button type="submit" class="btn btn-sm">Applica</button></noscript>
+
+                    @if($filtriAttivi)
+                        <a href="{{ route('annunci.index') }}" class="shop-reset">
+                            <i class="bi bi-x-circle me-1"></i> Rimuovi filtri
+                        </a>
                     @endif
                 </div>
-                
-                <div class="card-body">
-                    <h5 class="card-title">{{ $annuncio->titolo }}</h5>
-                    @if($annuncio->brand)
-                    <span class="badge mb-2" style="background-color: #feed02; color: #1a1814;">{{ $annuncio->brand }}</span>
-                    @endif
-                    <p class="card-text fw-bold">€ {{ number_format($annuncio->prezzo, 2, ',', '.') }}</p>
+            </form>
+        @endif
+
+        {{-- Sezioni per categoria: compaiono solo se contengono annunci --}}
+        @forelse($sezioni as $sezione)
+            <section class="shop-sezione" id="{{ $sezione['slug'] }}">
+                <div class="shop-sezione-header">
+                    <h2 class="shop-sezione-title">{{ $sezione['label'] }}</h2>
+                    <span class="shop-sezione-count">
+                        {{ $sezione['annunci']->count() }} {{ $sezione['annunci']->count() === 1 ? 'prodotto' : 'prodotti' }}
+                    </span>
                 </div>
-                
-                <div class="card-footer bg-white border-0 d-flex gap-2 flex-wrap">
-                    <a href="{{ route('annunci.show', $annuncio) }}" class="btn btn-sm">Vai al dettaglio</a>
-                    
-                    @if(auth()->check() && in_array(auth()->user()->role, ['admin', 'owner']))
-                    <a href="{{ route('annunci.edit', $annuncio) }}" class="btn btn-sm btn-outline-secondary">
-                        <i class="bi bi-pencil"></i>
-                    </a>
-                    <form action="{{ route('annunci.destroy', $annuncio) }}" method="POST" class="d-inline">
-                        @csrf @method('DELETE')
-                        <button class="btn btn-sm btn-outline-danger"
-                        onclick="return confirm('Sei sicuro di voler eliminare questo annuncio?')">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </form>
-                @if($annuncio->stato !== 'venduto')
-                <form action="{{ route('annunci.venduto', $annuncio) }}" method="POST" class="d-inline">
-                    @csrf @method('PATCH')
-                    <button class="btn btn-sm btn-outline-secondary">
-                        <i class="bi bi-check-circle"></i> Venduto
-                    </button>
-                </form>
-                @endif
-                @endif
-            </div>
-        </div>
+                <div class="row g-4">
+                    @foreach($sezione['annunci'] as $annuncio)
+                        @include('annunci.partials.card', ['annuncio' => $annuncio])
+                    @endforeach
+                </div>
+            </section>
+        @empty
+            @if($filtriAttivi)
+                <p class="text-muted">Nessun prodotto corrisponde ai filtri scelti.
+                    <a href="{{ route('annunci.index') }}">Rimuovi filtri</a></p>
+            @else
+                <p class="text-muted">Nessun annuncio disponibile. Questa pagina sarà attiva a breve.</p>
+            @endif
+        @endforelse
     </div>
-    @empty
-    <p class="text-muted">Nessun annuncio disponibile. Questa pagina sarà attiva a breve.</p>
-    @endforelse
-</div>
-</div>
 </x-layout>

@@ -1,7 +1,13 @@
 @import 'bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import 'style.css';
-@import url('https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/* font sul nostro server (niente Google Fonts: nessun dato dei visitatori inviato a terzi) */
+@import '@fontsource/caladea/400.css';
+@import '@fontsource/caladea/400-italic.css';
+@import '@fontsource/caladea/700.css';
+@import '@fontsource/caladea/700-italic.css';
+@import '@fontsource-variable/montserrat/wght.css';
+@import '@fontsource-variable/montserrat/wght-italic.css';
 
 
 /* TIMBRO VENDUTO */

@@ -1,4 +1,12 @@
 <x-layout>
+    @php
+        // larghezza/altezza reali delle foto: il browser riserva lo spazio prima di caricarle,
+        // così la pagina non "salta" (e il link #clienti-soddisfatte arriva nel punto giusto)
+        $dim = function (string $path): string {
+            $size = @getimagesize(public_path($path));
+            return $size ? 'width="' . $size[0] . '" height="' . $size[1] . '"' : '';
+        };
+    @endphp
 
     {{-- Hero --}}
     <div class="gallery-hero" style="margin-top: 80px;">
@@ -32,12 +40,12 @@
         </div>
         <div class="masonry-grid" data-section="negozio">
             @foreach([
-                'img/negozio0.JPG', 'img/negozio1.JPG', 'img/negozio2.JPG',
-                'img/negozio3.JPG', 'img/negozio4.JPG', 'img/oppela!!.jpg',
-                'img/paola.jpg'
+                'media/negozio0.JPG', 'media/negozio1.JPG', 'media/negozio2.JPG',
+                'media/negozio3.JPG', 'media/negozio4.JPG', 'media/oppela!!.jpg',
+                'media/paola.jpg', 'media/negozio11.jpg'
             ] as $img)
                 <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="Il negozio">
-                    <img src="{{ asset($img) }}" alt="Il negozio" loading="lazy">
+                    <img src="{{ asset($img) }}" {!! $dim($img) !!} alt="Il negozio" loading="lazy">
                     <div class="masonry-overlay">
                         <i class="bi bi-zoom-in"></i>
                     </div>
@@ -53,12 +61,12 @@
         </div>
         <div class="masonry-grid" data-section="quartiere">
             @foreach([
-                'img/quartiere0.JPG', 'img/quartiere1.JPG', 'img/quartiere2.JPG',
-                'img/quartiere3.JPG', 'img/quartiere4.JPG', 'img/quartiere.JPG',
-                'img/SanValentino.jpg'
+                'media/quartiere0.JPG', 'media/quartiere1.JPG', 'media/quartiere2.JPG',
+                'media/quartiere3.JPG', 'media/quartiere4.JPG', 'media/quartiere.JPG',
+                'media/SanValentino.jpg'
             ] as $img)
                 <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="Il quartiere">
-                    <img src="{{ asset($img) }}" alt="Il quartiere" loading="lazy">
+                    <img src="{{ asset($img) }}" {!! $dim($img) !!} alt="Il quartiere" loading="lazy">
                     <div class="masonry-overlay">
                         <i class="bi bi-zoom-in"></i>
                     </div>
@@ -67,19 +75,18 @@
         </div>
     </section>
 
-    {{-- Sezione: Le iniziative --}}
+    {{-- Sezione: Dieci anni di Oppela!! --}}
     <section class="gallery-section">
         <div class="gallery-section-header">
-            <h2 class="gallery-section-title">Le iniziative</h2>
+            <h2 class="gallery-section-title">Dieci anni di Oppela!!</h2>
         </div>
-        <div class="masonry-grid" data-section="iniziative">
+        <div class="masonry-grid" data-section="dieci-anni">
             @foreach([
-                'img/SanValentino1.jpg', 'img/sanvalentino2.jpg', 'img/negozio0.JPG',
-                'img/negozio1.JPG', 'img/quartiere0.JPG', 'img/quartiere1.JPG',
-                'img/paola.jpg'
+                'media/10anni_1.jpg', 'media/10anni_2.jpg', 'media/10anni_3.jpg',
+                'media/10anni_4.jpg', 'media/10anni_5.jpg', 'media/10anni_7.jpg'
             ] as $img)
-                <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="Le iniziative">
-                    <img src="{{ asset($img) }}" alt="Le iniziative" loading="lazy">
+                <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="Dieci anni di Oppela!!">
+                    <img src="{{ asset($img) }}" {!! $dim($img) !!} alt="Dieci anni di Oppela!!" loading="lazy">
                     <div class="masonry-overlay">
                         <i class="bi bi-zoom-in"></i>
                     </div>
@@ -88,19 +95,21 @@
         </div>
     </section>
 
-    {{-- Sezione: I clienti e gli amici --}}
-    <section class="gallery-section">
+    {{-- Sezione: Clienti soddisfatte (la home punta qui con #clienti-soddisfatte) --}}
+    <section class="gallery-section" id="clienti-soddisfatte">
         <div class="gallery-section-header">
-            <h2 class="gallery-section-title">I clienti e gli amici</h2>
+            <h2 class="gallery-section-title">Clienti soddisfatte</h2>
         </div>
         <div class="masonry-grid" data-section="clienti">
-            @foreach([
-                'img/negozio2.JPG', 'img/negozio3.JPG', 'img/negozio4.JPG',
-                'img/quartiere2.JPG', 'img/quartiere3.JPG', 'img/quartiere4.JPG',
-                'img/oppela!!.jpg'
-            ] as $img)
-                <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="I clienti e gli amici">
-                    <img src="{{ asset($img) }}" alt="I clienti e gli amici" loading="lazy">
+            @php
+                // tutte le foto media/client_N.jpg, in ordine di numero: basta caricarne di nuove
+                $fotoClienti = glob(public_path('media/client_*.jpg')) ?: [];
+                natsort($fotoClienti);
+                $fotoClienti = array_map(fn ($f) => 'media/' . basename($f), $fotoClienti);
+            @endphp
+            @foreach($fotoClienti as $img)
+                <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="Clienti soddisfatte">
+                    <img src="{{ asset($img) }}" {!! $dim($img) !!} alt="Cliente soddisfatta di Oppela!!" loading="lazy">
                     <div class="masonry-overlay">
                         <i class="bi bi-zoom-in"></i>
                     </div>
@@ -108,6 +117,29 @@
             @endforeach
         </div>
     </section>
+
+    {{-- Sezione: Set fotografico Primavera Estate 2026 --}}
+    <section class="gallery-section gallery-section-carousel">
+        <div class="gallery-section-header gallery-carousel-header">
+            <div>
+                <h2 class="gallery-section-title">Set fotografico collezione primavera estate 2026</h2>
+                <p class="gallery-section-sub">Modella Annalisa Petrini</p>
+            </div>
+            <a href="{{ route('annunci.index') }}" class="brand-shop-cta">
+                Vai allo shop <i class="bi bi-arrow-right"></i>
+            </a>
+            <div class="brand-row-nav">
+                <button class="brand-nav-btn" data-target="gallery-pe26" data-dir="prev" aria-label="Indietro">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <button class="brand-nav-btn" data-target="gallery-pe26" data-dir="next" aria-label="Avanti">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        @include('partials.collezione-pe26', ['scrollId' => 'gallery-pe26'])
+    </section>
+
      {{-- Banner Orari + Mappa --}}
     <section class="info-section">
         <div class="info-orari">
@@ -135,18 +167,7 @@
             </a>
         </div>
 
-        <div class="info-mappa">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2934.1!2d12.6469!3d42.5630!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sViale+Papa+Zaccaria+1%2C+05100+Terni+TR!5e0!3m2!1sit!2sit!4v1"
-                width="100%"
-                height="100%"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Posizione negozio Oppela">
-            </iframe>
-        </div>
+        @include('partials.mappa')
     </section>
 
 </x-layout>

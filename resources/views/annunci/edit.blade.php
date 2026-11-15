@@ -2,6 +2,10 @@
     <div class="container py-5" style="margin-top: 80px;">
         <h1 class="mb-4">Modifica annuncio</h1>
 
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul class="mb-0">
@@ -35,39 +39,27 @@
                 <input type="text" name="brand" class="form-control" value="{{ old('brand', $annuncio->brand) }}">
             </div>
 
-            {{-- immagini attuali --}}
-            @if($annuncio->immagini->count())
-                <div class="mb-3">
-                    <label class="form-label">Foto attuali</label>
-                    <div class="d-flex gap-2 flex-wrap">
-                        @foreach($annuncio->immagini as $immagine)
-                            <div class="position-relative">
-                                <img src="{{ Storage::url($immagine->path) }}"
-                                    style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px;"
-                                    alt="foto">
-                                <form action="{{ route('annunci.immagine.destroy', $immagine) }}" method="POST">
-                                    @csrf @method('DELETE')
-                                    <button class="btn btn-danger btn-sm position-absolute top-0 end-0"
-                                            style="padding: 2px 6px; font-size: 0.7rem;">
-                                        <i class="bi bi-x"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
+            @include('annunci.partials.categoria-taglie', ['annuncio' => $annuncio ?? null])
 
-            {{-- aggiungi nuove foto --}}
-            @if($annuncio->immagini->count() < 5)
-                <div class="mb-3">
-                    <label class="form-label">Aggiungi foto (max {{ 5 - $annuncio->immagini->count() }} ancora)</label>
-                    <input type="file" name="immagini[]" class="form-control" multiple accept="image/*">
-                </div>
-            @endif
+            @include('annunci.partials.foto-gestione', ['annuncio' => $annuncio])
+
+            @include('annunci.partials.evidenza-campo', ['annuncio' => $annuncio])
 
             <button type="submit" class="btn">Salva modifiche</button>
             <a href="{{ route('annunci.show', $annuncio) }}" class="btn btn-outline-secondary ms-2">Annulla</a>
         </form>
+
+        {{-- form per eliminare e spostare le singole foto, fuori dal form principale --}}
+        @foreach($annuncio->immagini as $immagine)
+            <form id="elimina-foto-{{ $immagine->id }}" action="{{ route('annunci.immagine.destroy', $immagine) }}" method="POST" hidden>
+                @csrf @method('DELETE')
+            </form>
+            @foreach(['su', 'giu'] as $direzione)
+                <form id="sposta-foto-{{ $immagine->id }}-{{ $direzione }}" action="{{ route('annunci.immagine.sposta', $immagine) }}" method="POST" hidden>
+                    @csrf @method('PATCH')
+                    <input type="hidden" name="direzione" value="{{ $direzione }}">
+                </form>
+            @endforeach
+        @endforeach
     </div>
 </x-layout>

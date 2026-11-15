@@ -35,11 +35,11 @@
                 <input type="text" name="brand" class="form-control" value="{{ old('brand') }}">
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">Foto (max 5)</label>
-                <input type="file" name="immagini[]" class="form-control" multiple accept="image/*">
-                <small class="text-muted">Formati accettati: jpg, jpeg, png, webp. Max 2MB per foto.</small>
-            </div>
+            @include('annunci.partials.categoria-taglie', ['annuncio' => $annuncio ?? null])
+
+            @include('annunci.partials.foto-nuove')
+
+            @include('annunci.partials.evidenza-campo')
 
             <button type="submit" class="btn">Pubblica annuncio</button>
             <a href="{{ route('annunci.index') }}" class="btn btn-outline-secondary ms-2">Annulla</a>

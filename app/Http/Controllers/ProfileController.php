@@ -19,19 +19,19 @@ class ProfileController extends Controller
 {
     $annunciAttivi = Annuncio::where('user_id', auth()->id())
                         ->where('stato', 'disponibile')
-                        ->with('immagineCopertina')
+                        ->with('immagini')
                         ->orderBy('created_at', 'desc')
                         ->get();
 
     $annunciVenduti = Annuncio::where('user_id', auth()->id())
                         ->where('stato', 'venduto')
-                        ->with('immagineCopertina')
+                        ->with('immagini')
                         ->orderBy('sold_at', 'desc')
                         ->get();
 
     $annunciEliminati = Annuncio::onlyTrashed()
                         ->where('user_id', auth()->id())
-                        ->with('immagineCopertina')
+                        ->with('immagini')
                         ->orderBy('deleted_at', 'desc')
                         ->get();
 

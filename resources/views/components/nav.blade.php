@@ -2,10 +2,10 @@
 <nav class="navbar navbar-expand-lg fixed-top bg-none">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="img/logo.jpg" class="logo" alt="">
+            <img src="{{ asset('media/logo.jpg') }}" class="logo" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <img src="img/stampella.svg" alt="Menu" class="toggler-icon">
+            <img src="{{ asset('media/stampella.svg') }}" alt="Menu" class="toggler-icon">
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav mx-4">

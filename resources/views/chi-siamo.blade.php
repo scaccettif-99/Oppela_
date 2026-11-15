@@ -19,7 +19,7 @@
         {{-- Sezione 1 --}}
         <div class="chisiamo-row">
             <div class="chisiamo-img-wrapper">
-                <img src="img/negozio2.jpg" alt="Le origini" class="chisiamo-banner-img" >
+                <img src="{{ asset('media/negozio2.JPG') }}" alt="Le origini" class="chisiamo-banner-img" >
                 <div class="chisiamo-caption caption-from-left">
                     <div class="chisiamo-caption-inner">
                         <h3>Le origini</h3>
@@ -31,8 +31,8 @@
 
         {{-- Sezione 2 --}}
         <div class="chisiamo-row">
-            <div class="chisiamo-img-wrapper">
-                <img src="img/paola.jpg" alt="Paola" class="chisiamo-banner-img">
+            <div class="chisiamo-img-wrapper chisiamo-ritratto">
+                <img src="{{ asset('media/paola1.jpg') }}" alt="Paola" class="chisiamo-banner-img">
                 <div class="chisiamo-caption caption-from-right">
                     <div class="chisiamo-caption-inner">
                         <h3>La persona dietro il negozio</h3>
@@ -45,7 +45,7 @@
         {{-- Sezione 3 --}}
         <div class="chisiamo-row">
             <div class="chisiamo-img-wrapper">
-                <img src="img/quartiere2.jpg" alt="La comunità">
+                <img src="{{ asset('media/quartiere2.JPG') }}" alt="La comunità">
                 <div class="chisiamo-caption caption-from-left">
                     <div class="chisiamo-caption-inner">
                         <h3>Una comunità, non solo un negozio</h3>
@@ -59,15 +59,13 @@
 
     {{-- Video --}}
     <section class="chisiamo-video-section">
-        <h2 class="chisiamo-video-title">Paola si racconta</h2>
+        <h2 class="chisiamo-video-title">L'atmosfera del negozio e San Valentino...</h2>
         <div class="chisiamo-video-wrapper">
-            <iframe
-                src="https://www.youtube.com/embed/aqo38Fs7Yqg"
-                title="Presentazione Oppela!!"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
+            <video controls playsinline preload="none"
+                    poster="{{ asset('media/video/san-valentino-poster.jpg') }}">
+                <source src="{{ asset('media/video/san-valentino.mp4') }}" type="video/mp4">
+                Il tuo browser non supporta la riproduzione video.
+            </video>
         </div>
     </section>
 
@@ -98,18 +96,7 @@
             </a>
         </div>
 
-        <div class="info-mappa">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2934.1!2d12.6469!3d42.5630!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sViale+Papa+Zaccaria+1%2C+05100+Terni+TR!5e0!3m2!1sit!2sit!4v1"
-                width="100%"
-                height="100%"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Posizione negozio Oppela">
-            </iframe>
-        </div>
+        @include('partials.mappa')
     </section>
 
 </x-layout>

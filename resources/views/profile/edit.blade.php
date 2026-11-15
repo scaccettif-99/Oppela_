@@ -5,7 +5,38 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
+        @if($errors->has('in_evidenza'))
+            <div class="alert alert-danger">{{ $errors->first('in_evidenza') }}</div>
+        @endif
+
         <h1 class="mb-5">Il mio profilo</h1>
+
+        {{-- Gestione sito: tutto quello che serve per aggiornare il sito --}}
+        @if(in_array(auth()->user()->role, ['admin', 'owner']))
+            <div class="gestione-sito mb-5">
+                <h5 class="mb-3">Gestione sito</h5>
+                <div class="gestione-sito-azioni">
+                    <a href="{{ route('annunci.create') }}" class="gestione-sito-btn">
+                        <i class="bi bi-plus-square"></i>
+                        <span>Nuovo annuncio</span>
+                    </a>
+                    <a href="{{ route('admin.home') }}" class="gestione-sito-btn">
+                        <i class="bi bi-images"></i>
+                        <span>Personalizza home</span>
+                        <small>slide e loghi</small>
+                    </a>
+                    <a href="#attivi" class="gestione-sito-btn" data-apri-tab="#attivi">
+                        <i class="bi bi-star"></i>
+                        <span>Capi in evidenza</span>
+                        <small>{{ \App\Models\Annuncio::contaInEvidenza() }} di {{ \App\Models\Annuncio::EVIDENZA_MAX }}</small>
+                    </a>
+                </div>
+                <p class="small text-muted mb-0 mt-3">
+                    Usa la stella <i class="bi bi-star"></i> sulle schede qui sotto per mettere o togliere un capo dalla home.
+                    Se i capi in evidenza sono meno di {{ \App\Models\Annuncio::EVIDENZA_MIN }}, la home si completa da sola con gli ultimi annunci.
+                </p>
+            </div>
+        @endif
 
         {{-- Cruscotto account in orizzontale --}}
         <div class="card border-0 shadow-sm p-4 mb-5">
