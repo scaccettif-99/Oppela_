@@ -6,7 +6,7 @@
 # =============================================================================
 set -euo pipefail
 APP_DIR="/var/www/oppela"
-PHP_VER="8.3"
+PHP_VER="8.4"
 cd "${APP_DIR}"
 
 echo "==> Modalita' manutenzione"

@@ -6,7 +6,7 @@
 #     curl -fsSLo installa.sh https://raw.githubusercontent.com/scaccettif-99/Oppela_/main/deploy/installa-server.sh
 #     bash installa.sh
 #
-#  Installa nginx, PHP 8.3, MySQL, Composer, Node 22; scarica il sito,
+#  Installa nginx, PHP 8.4, MySQL, Composer, Node 22; scarica il sito,
 #  crea database e file .env, compila gli stili, esegue le migrazioni,
 #  configura il caricamento foto fino a 15 MB e l'operazione pianificata
 #  che elimina i venduti dopo 7 giorni.
@@ -18,7 +18,7 @@ REPO="${REPO:-https://github.com/scaccettif-99/Oppela_.git}"
 APP_DIR="/var/www/oppela"
 DB_NAME="oppela"
 DB_USER="oppela"
-PHP_VER="8.3"
+PHP_VER="8.4"   # stessa versione del PC di sviluppo (le librerie bloccate in composer.lock la richiedono)
 IP_PUBBLICO="$(curl -fsS4 https://ifconfig.me || hostname -I | awk '{print $1}')"
 
 passo() { echo -e "\n\033[1;33m==> $*\033[0m"; }
@@ -42,9 +42,15 @@ apt_attendi() {
 }
 apt_attendi
 apt-get -o DPkg::Lock::Timeout=600 update -y
+# PHP 8.4 non è nei pacchetti standard di Ubuntu 24.04: repository ufficiale di Ondřej Surý
+apt-get -o DPkg::Lock::Timeout=600 install -y software-properties-common
+add-apt-repository -y ppa:ondrej/php
+apt-get -o DPkg::Lock::Timeout=600 update -y
 apt-get -o DPkg::Lock::Timeout=600 install -y nginx mysql-server git unzip curl ufw cron \
     php${PHP_VER}-fpm php${PHP_VER}-cli php${PHP_VER}-mysql php${PHP_VER}-mbstring php${PHP_VER}-xml \
     php${PHP_VER}-curl php${PHP_VER}-zip php${PHP_VER}-gd php${PHP_VER}-intl php${PHP_VER}-bcmath
+
+update-alternatives --set php /usr/bin/php${PHP_VER}
 
 passo "Composer"
 if ! command -v composer >/dev/null; then
