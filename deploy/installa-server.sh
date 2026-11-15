@@ -109,7 +109,9 @@ passo "Dipendenze PHP e compilazione stili"
 export COMPOSER_ALLOW_SUPERUSER=1
 composer install --no-dev --optimize-autoloader --no-interaction
 grep -q '^APP_KEY=base64' .env || php artisan key:generate --force
-npm ci --no-audit --no-fund
+# il package-lock.json generato su Windows può non elencare i moduli solo-Linux (difetto noto di npm):
+# in quel caso installo normalmente e poi ripristino il file, così "git pull" resta pulito
+npm ci --no-audit --no-fund || { npm install --no-audit --no-fund && git checkout -- package-lock.json; }
 npm run build
 rm -f public/hot
 

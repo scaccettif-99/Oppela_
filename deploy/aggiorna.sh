@@ -20,7 +20,9 @@ git pull --ff-only
 echo "==> Dipendenze e stili"
 export COMPOSER_ALLOW_SUPERUSER=1
 composer install --no-dev --optimize-autoloader --no-interaction
-npm ci --no-audit --no-fund
+# il package-lock.json generato su Windows può non elencare i moduli solo-Linux (difetto noto di npm):
+# in quel caso installo normalmente e poi ripristino il file, così "git pull" resta pulito
+npm ci --no-audit --no-fund || { npm install --no-audit --no-fund && git checkout -- package-lock.json; }
 npm run build
 rm -f public/hot
 
