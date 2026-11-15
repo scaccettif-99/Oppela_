@@ -31,8 +31,18 @@ fi
 
 passo "Pacchetti di sistema"
 export DEBIAN_FRONTEND=noninteractive
-apt-get update -y
-apt-get install -y nginx mysql-server git unzip curl ufw cron \
+# su una Droplet appena creata Ubuntu fa da solo i primi aggiornamenti: aspetto che finisca
+cloud-init status --wait >/dev/null 2>&1 || true
+apt_attendi() {
+    local n=0
+    while fuser /var/lib/dpkg/lock-frontend /var/lib/dpkg/lock /var/lib/apt/lists/lock >/dev/null 2>&1; do
+        [ $((n % 6)) -eq 0 ] && echo "   (aggiornamenti automatici di Ubuntu in corso, attendo...)"
+        n=$((n + 1)); sleep 10
+    done
+}
+apt_attendi
+apt-get -o DPkg::Lock::Timeout=600 update -y
+apt-get -o DPkg::Lock::Timeout=600 install -y nginx mysql-server git unzip curl ufw cron \
     php${PHP_VER}-fpm php${PHP_VER}-cli php${PHP_VER}-mysql php${PHP_VER}-mbstring php${PHP_VER}-xml \
     php${PHP_VER}-curl php${PHP_VER}-zip php${PHP_VER}-gd php${PHP_VER}-intl php${PHP_VER}-bcmath
 
@@ -44,7 +54,7 @@ fi
 passo "Node.js 22 (serve solo per compilare gli stili)"
 if ! command -v node >/dev/null || [ "$(node -v | cut -d. -f1 | tr -d v)" -lt 20 ]; then
     curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
-    apt-get install -y nodejs
+    apt-get -o DPkg::Lock::Timeout=600 install -y nodejs
 fi
 
 passo "Database MySQL"
