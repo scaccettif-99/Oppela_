@@ -41,20 +41,16 @@ sed -i 's/^OPPELA_PIVA=.*/OPPELA_PIVA=12345678901/' .env
 sudo -u www-data php artisan optimize
 ```
 
-## 5. Dominio e HTTPS (quando c'è il dominio)
+## 5. Dominio e HTTPS
 
-1. Dal registrar del dominio: record **A** di `oppela.it` e `www.oppela.it` → `IP`.
-2. Sul server:
+1. Dal pannello del registrar: due record **A**, `oppelaterni.it` e `www.oppelaterni.it`, verso `IP`
+   (cancellando eventuali record A/CNAME di "parcheggio" creati dal registrar).
+2. Dopo qualche minuto, sul server:
    ```bash
-   sed -i 's/server_name _;/server_name oppela.it www.oppela.it;/' /etc/nginx/sites-available/oppela
-   nginx -t && systemctl reload nginx
-   apt-get install -y certbot python3-certbot-nginx
-   certbot --nginx -d oppela.it -d www.oppela.it --redirect -m oppela.tr@gmail.com --agree-tos -n
-   cd /var/www/oppela
-   sed -i 's|^APP_URL=.*|APP_URL=https://oppela.it|' .env
-   echo "SESSION_SECURE_COOKIE=true" >> .env
-   sudo -u www-data php artisan optimize
+   ssh root@IP "bash /var/www/oppela/deploy/attiva-dominio.sh"
    ```
+   Lo script controlla prima il DNS (se non punta ancora al server si ferma senza toccare nulla),
+   poi attiva il certificato HTTPS con rinnovo automatico e porta tutto su `https://www.oppelaterni.it`.
 
 ## Note
 
