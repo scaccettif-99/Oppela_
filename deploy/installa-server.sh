@@ -139,6 +139,13 @@ systemctl restart php${PHP_VER}-fpm
 passo "nginx"
 sed "s|__APP_DIR__|${APP_DIR}|g; s|__PHP_VER__|${PHP_VER}|g" "${APP_DIR}/deploy/nginx-oppela.conf" > /etc/nginx/sites-available/oppela
 ln -sf /etc/nginx/sites-available/oppela /etc/nginx/sites-enabled/oppela
+# compressione di stili, script e SVG (le foto sono già compresse)
+cat > /etc/nginx/conf.d/oppela-gzip.conf <<'NGINX'
+gzip_vary on;
+gzip_comp_level 5;
+gzip_min_length 1024;
+gzip_types text/plain text/css application/json application/javascript text/javascript image/svg+xml application/xml;
+NGINX
 rm -f /etc/nginx/sites-enabled/default
 nginx -t && systemctl reload nginx
 

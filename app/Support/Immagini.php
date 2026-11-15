@@ -12,6 +12,19 @@ use Illuminate\Support\Str;
  */
 class Immagini
 {
+    public const CARTELLA_MINI = 'mini';
+
+    public const LATO_MINI = 800;
+
+    // URL della miniatura di una foto di public/media (creata con "php artisan media:miniature");
+    // se la miniatura non c'è ancora, la foto intera
+    public static function mini(string $percorso): string
+    {
+        $mini = dirname($percorso) . '/' . self::CARTELLA_MINI . '/' . basename($percorso) . '.webp';
+
+        return asset(is_file(public_path($mini)) ? $mini : $percorso);
+    }
+
     // foto (annunci, slide): JPG max $lato px sul lato lungo
     public static function salvaFoto(UploadedFile $file, string $cartella, int $lato = 1600): string
     {

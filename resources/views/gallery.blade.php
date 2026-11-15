@@ -45,7 +45,7 @@
                 'media/paola.jpg', 'media/negozio11.jpg'
             ] as $img)
                 <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="Il negozio">
-                    <img src="{{ asset($img) }}" {!! $dim($img) !!} alt="Il negozio" loading="lazy">
+                    <img src="{{ \App\Support\Immagini::mini($img) }}" {!! $dim($img) !!} alt="Il negozio" loading="lazy">
                     <div class="masonry-overlay">
                         <i class="bi bi-zoom-in"></i>
                     </div>
@@ -66,7 +66,7 @@
                 'media/SanValentino.jpg'
             ] as $img)
                 <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="Il quartiere">
-                    <img src="{{ asset($img) }}" {!! $dim($img) !!} alt="Il quartiere" loading="lazy">
+                    <img src="{{ \App\Support\Immagini::mini($img) }}" {!! $dim($img) !!} alt="Il quartiere" loading="lazy">
                     <div class="masonry-overlay">
                         <i class="bi bi-zoom-in"></i>
                     </div>
@@ -86,7 +86,7 @@
                 'media/10anni_4.jpg', 'media/10anni_5.jpg', 'media/10anni_7.jpg'
             ] as $img)
                 <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="Dieci anni di Oppela!!">
-                    <img src="{{ asset($img) }}" {!! $dim($img) !!} alt="Dieci anni di Oppela!!" loading="lazy">
+                    <img src="{{ \App\Support\Immagini::mini($img) }}" {!! $dim($img) !!} alt="Dieci anni di Oppela!!" loading="lazy">
                     <div class="masonry-overlay">
                         <i class="bi bi-zoom-in"></i>
                     </div>
@@ -109,7 +109,7 @@
             @endphp
             @foreach($fotoClienti as $img)
                 <div class="masonry-item gallery-item" data-src="{{ asset($img) }}" data-caption="Clienti soddisfatte">
-                    <img src="{{ asset($img) }}" {!! $dim($img) !!} alt="Cliente soddisfatta di Oppela!!" loading="lazy">
+                    <img src="{{ \App\Support\Immagini::mini($img) }}" {!! $dim($img) !!} alt="Cliente soddisfatta di Oppela!!" loading="lazy">
                     <div class="masonry-overlay">
                         <i class="bi bi-zoom-in"></i>
                     </div>

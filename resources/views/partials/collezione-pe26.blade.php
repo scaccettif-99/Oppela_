@@ -8,7 +8,7 @@
             <div class="brand-card collezione-card gallery-item"
                     data-src="{{ asset('media/coll_est_26_' . $n . '.jpg') }}"
                     data-caption="Collezione Primavera Estate 2026">
-                <img src="{{ asset('media/coll_est_26_' . $n . '.jpg') }}"
+                <img src="{{ \App\Support\Immagini::mini('media/coll_est_26_' . $n . '.jpg') }}"
                         alt="Collezione Primavera Estate 2026 - foto {{ $n }}"
                         loading="lazy">
             </div>

@@ -62,6 +62,10 @@ NGINX
 sed -i "s|server_name ${PRINCIPALE} ${DOMINIO};|server_name ${PRINCIPALE};|" "${NGINX_SITO}"
 # certbot ha creato il redirect http->https: lo faccio puntare sempre a www
 sed -i "s|return 301 https://\$host\$request_uri;|return 301 https://${PRINCIPALE}\$request_uri;|" "${NGINX_SITO}"
+# HTTP/2: il browser scarica foto e stili in parallelo su una sola connessione
+for f in "${NGINX_SITO}" /etc/nginx/conf.d/oppela-senza-www.conf; do
+    grep -q 'http2' "$f" || sed -i -E 's/(listen (\[::\]:)?443 ssl)([ ;])/\1 http2\3/' "$f"
+done
 nginx -t && systemctl reload nginx
 
 passo "Configurazione del sito"

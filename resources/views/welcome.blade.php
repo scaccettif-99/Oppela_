@@ -71,8 +71,8 @@
                     @foreach($riserva as [$modella, $prodotto])
                         <a href="{{ route('annunci.index') }}" class="brand-card evidenza-card">
                             <span class="brand-badge">In evidenza</span>
-                            <img class="img-primary" src="{{ asset('media/' . $modella) }}" alt="Modella" loading="lazy">
-                            <img class="img-secondary" src="{{ asset('media/' . $prodotto) }}" alt="Capo" loading="lazy">
+                            <img class="img-primary" src="{{ \App\Support\Immagini::mini('media/' . $modella) }}" alt="Modella" loading="lazy">
+                            <img class="img-secondary" src="{{ \App\Support\Immagini::mini('media/' . $prodotto) }}" alt="Capo" loading="lazy">
                             <span class="evidenza-dettaglio">
                                 <span class="evidenza-dettaglio-cta">Scopri lo shop <i class="bi bi-arrow-right"></i></span>
                             </span>
@@ -141,7 +141,7 @@
             <div class="home-clienti-grid">
                 @foreach([2, 5, 8, 13] as $n)
                     <a href="{{ route('gallery') }}#clienti-soddisfatte" class="home-clienti-item">
-                        <img src="{{ asset('media/client_' . $n . '.jpg') }}" alt="Cliente soddisfatta di Oppela!!" loading="lazy">
+                        <img src="{{ \App\Support\Immagini::mini('media/client_' . $n . '.jpg') }}" alt="Cliente soddisfatta di Oppela!!" loading="lazy">
                     </a>
                 @endforeach
             </div>
